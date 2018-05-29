@@ -70,7 +70,12 @@ static uint32_t GetNextEDAWorkRequired(const CBlockIndex *pindexPrev,
     // If producing the last 6 blocks took less than 12h, we keep the same
     // difficulty.
     const CBlockIndex *pindex6 = pindexPrev->GetAncestor(nHeight - 7);
-    assert(pindex6);
+
+    if(pindex6 == nullptr)
+    {
+        return nBits;
+    }
+
     int64_t mtp6blocks =
         pindexPrev->GetMedianTimePast() - pindex6->GetMedianTimePast();
     if (mtp6blocks < 12 * 3600) {
