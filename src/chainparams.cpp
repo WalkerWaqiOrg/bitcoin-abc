@@ -105,7 +105,7 @@ public:
         consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");  // uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         // two weeks
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60;
-        consensus.nPowTargetSpacing = 10 * 60;
+        consensus.nPowTargetSpacing = 1 * 60;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         // 95% of 2016
@@ -136,10 +136,10 @@ public:
         consensus.defaultAssumeValid = uint256S("0x00");
 
         // August 1, 2017 hard fork
-        consensus.uahfHeight = 478558;
+        consensus.uahfHeight = 0;
 
         // November 13, 2017 hard fork
-        consensus.daaHeight = 504031;
+        consensus.daaHeight = 150;
 
         // May 15, 2018 hard fork
         consensus.monolithActivationTime = 1526400000;

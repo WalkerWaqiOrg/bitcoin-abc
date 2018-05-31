@@ -270,7 +270,7 @@ uint32_t GetNextCashWorkRequired(const CBlockIndex *pindexPrev,
 
     // Compute the difficulty based on the full adjustment interval.
     const uint32_t nHeight = pindexPrev->nHeight;
-    assert(nHeight >= params.DifficultyAdjustmentInterval());
+    assert(nHeight >= 144 /*params.DifficultyAdjustmentInterval()*/);
 
     // Get the last suitable block of the difficulty interval.
     const CBlockIndex *pindexLast = GetSuitableBlock(pindexPrev);
