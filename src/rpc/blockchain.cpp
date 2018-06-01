@@ -126,6 +126,7 @@ UniValue blockToJSON(const Config &config, const CBlock &block,
         }
     }
     result.push_back(Pair("tx", txs));
+    result.push_back(Pair("alreadyGeneratedCoin", block.nAlreadyGeneratedCoins));
     result.push_back(Pair("time", block.GetBlockTime()));
     result.push_back(
         Pair("mediantime", int64_t(blockindex->GetMedianTimePast())));

@@ -229,6 +229,7 @@ public:
     //! block header
     int32_t nVersion;
     uint256 hashMerkleRoot;
+    uint64_t nAlreadyGeneratedCoins;
     uint32_t nTime;
     uint32_t nBits;
     uint32_t nNonce;
@@ -273,6 +274,7 @@ public:
 
         nVersion = block.nVersion;
         hashMerkleRoot = block.hashMerkleRoot;
+        nAlreadyGeneratedCoins = block.nAlreadyGeneratedCoins;
         nTime = block.nTime;
         // Default to block time if nTimeReceived is never set, which
         // in effect assumes that this block is honestly mined.
@@ -308,6 +310,7 @@ public:
             block.hashPrevBlock = pprev->GetBlockHash();
         }
         block.hashMerkleRoot = hashMerkleRoot;
+        block.nAlreadyGeneratedCoins = nAlreadyGeneratedCoins;
         block.nTime = nTime;
         block.nBits = nBits;
         block.nNonce = nNonce;
@@ -443,6 +446,7 @@ public:
         READWRITE(this->nVersion);
         READWRITE(hashPrev);
         READWRITE(hashMerkleRoot);
+        READWRITE(nAlreadyGeneratedCoins);
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
@@ -453,6 +457,7 @@ public:
         block.nVersion = nVersion;
         block.hashPrevBlock = hashPrev;
         block.hashMerkleRoot = hashMerkleRoot;
+        block.nAlreadyGeneratedCoins = nAlreadyGeneratedCoins;
         block.nTime = nTime;
         block.nBits = nBits;
         block.nNonce = nNonce;

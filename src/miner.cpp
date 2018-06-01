@@ -193,8 +193,9 @@ BlockAssembler::CreateNewBlock(const CScript &scriptPubKeyIn) {
     coinbaseTx.vin[0].prevout.SetNull();
     coinbaseTx.vout.resize(1);
     coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
+    Amount baseReward = GetBlockSubsidy(nHeight, chainparams.GetConsensus());
     coinbaseTx.vout[0].nValue =
-        nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus());
+        nFees + baseReward;
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
     pblock->vtx[0] = MakeTransactionRef(coinbaseTx);
     pblocktemplate->vTxFees[0] = -1 * nFees;
@@ -207,6 +208,7 @@ BlockAssembler::CreateNewBlock(const CScript &scriptPubKeyIn) {
 
     // Fill in header.
     pblock->hashPrevBlock = pindexPrev->GetBlockHash();
+    pblock->nAlreadyGeneratedCoins = pindexPrev->nAlreadyGeneratedCoins + baseReward.GetSatoshis();
     UpdateTime(pblock, *config, pindexPrev);
     pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, *config);
     pblock->nNonce = 0;

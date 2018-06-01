@@ -48,6 +48,7 @@ static CBlock CreateGenesisBlock(const char *pszTimestamp,
     genesis.vtx.push_back(MakeTransactionRef(std::move(txNew)));
     genesis.hashPrevBlock.SetNull();
     genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
+    genesis.nAlreadyGeneratedCoins = 50;
     return genesis;
 }
 
@@ -163,10 +164,10 @@ public:
         nDefaultPort = 8333;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1525656448, 666383, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1525656448, 455111, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock ==
-               uint256S("000003b3eb845b18a3f69e8c62dc4673dd55fc80613acc887e55238b45f2c0fe"));
+               uint256S("000003c90f88dc32c149b55c885e48b092a08351bc8499355abfc9849b6840da"));
         assert(genesis.hashMerkleRoot ==
                uint256S("73075506d2c88f07780d4ffab36cfdcc7ac907844251ca2b5a04be234c7d7eb1"));
 
