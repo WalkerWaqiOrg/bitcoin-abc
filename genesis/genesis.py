@@ -19,7 +19,7 @@ def main():
   hash_merkle_root = hashlib.sha256(hashlib.sha256(tx).digest()).digest()
   print_block_info(options, hash_merkle_root, bits)
 
-  block_header        = create_block_header(hash_merkle_root, options.time, bits, options.nonce)
+  block_header        = create_block_header(hash_merkle_root, options.time, bits, options.nonce, options.value)
   genesis_hash, nonce = generate_hash(block_header, algorithm, options.nonce, target)
   announce_found_genesis(genesis_hash, nonce)
 
@@ -36,7 +36,7 @@ def get_args():
                     help="the PoW algorithm: [SHA256|scrypt|X11|X13|X15]")
   parser.add_option("-p", "--pubkey", dest="pubkey", default="0432c10dbbb8b2f06b8baba9fdb56ab925f78ae1b59fb4694625d05da0f98ee40ab4880752649529f36adee062b6f0531f4a088ae954ee86f70f41a5ad628e25f6",
                    type="string", help="the pubkey found in the output script")
-  parser.add_option("-v", "--value", dest="value", default=5000000000,
+  parser.add_option("-v", "--value", dest="value", default=5000,
                    type="int", help="the value in coins for the output, full value (exp. in bitcoin 5000000000 - To get other coins value: Block Value * 100000000)")
 
   (options, args) = parser.parse_args()
@@ -105,7 +105,7 @@ def create_transaction(input_script, output_script,options):
   return transaction.build(tx)
 
 
-def create_block_header(hash_merkle_root, time, bits, nonce):
+def create_block_header(hash_merkle_root, time, bits, nonce, value):
   block_header = Struct("block_header",
     Bytes("version",4),
     Bytes("hash_prev_block", 32),
@@ -119,7 +119,7 @@ def create_block_header(hash_merkle_root, time, bits, nonce):
   genesisblock.version          = struct.pack('<I', 1)
   genesisblock.hash_prev_block  = struct.pack('<qqqq', 0,0,0,0)
   genesisblock.hash_merkle_root = hash_merkle_root
-  genesisblock.alreadyGeneratedCoins = struct.pack('<Q', 50)
+  genesisblock.alreadyGeneratedCoins = struct.pack('<Q', value)
   genesisblock.time             = struct.pack('<I', time)
   genesisblock.bits             = struct.pack('<I', bits)
   genesisblock.nonce            = struct.pack('<I', nonce)
