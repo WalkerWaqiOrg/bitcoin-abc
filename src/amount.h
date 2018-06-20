@@ -117,6 +117,13 @@ public:
     constexpr Amount operator%(const int b) const { return Amount(amount % b); }
 
     /**
+     * Right shift
+     */
+    friend constexpr Amount operator>>(const Amount a, const Amount b) {
+        return Amount(a.amount >> b.amount);
+    }
+
+    /**
      * Do not implement double ops to get an error with double and ensure
      * casting to integer is explicit.
      */
@@ -140,8 +147,10 @@ public:
     }
 };
 
-static const Amount COIN(100000000);
-static const Amount CENT(1000000);
+static const Amount RRC_COIN_RATE (1000000);
+static const Amount COIN(Amount(100000000)/RRC_COIN_RATE);
+static const Amount CENT(Amount(1000000)/RRC_COIN_RATE);
+static const Amount COIN_RIGHT_SHIFT(4);
 
 extern const std::string CURRENCY_UNIT;
 
@@ -155,7 +164,9 @@ extern const std::string CURRENCY_UNIT;
  * critical; in unusual circumstances like a(nother) overflow bug that allowed
  * for the creation of coins out of thin air modification could lead to a fork.
  */
-static const Amount MAX_MONEY = 21000000 * COIN;
+static const Amount MAX_MONEY = 1800000000 * COIN;
+static const Amount PREMINE_MONEY = 1080000000 * COIN;
+static const Amount  EMISSION_SPEED_FACTOR =  Amount(19);
 inline bool MoneyRange(const Amount nValue) {
     return (nValue >= Amount(0) && nValue <= MAX_MONEY);
 }

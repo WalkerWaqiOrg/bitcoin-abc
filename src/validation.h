@@ -60,9 +60,9 @@ static const Amount DEFAULT_MIN_RELAY_TX_FEE(1000);
 /** Default for -excessutxocharge for transactions transactions */
 static const Amount DEFAULT_UTXO_FEE(0);
 //! -maxtxfee default
-static const Amount DEFAULT_TRANSACTION_MAXFEE(COIN / 10);
+static const Amount DEFAULT_TRANSACTION_MAXFEE(COIN.GetSatoshis() / 10 * RRC_COIN_RATE);
 //! Discourage users to set fees higher than this amount (in satoshis) per kB
-static const Amount HIGH_TX_FEE_PER_KB(COIN / 100);
+static const Amount HIGH_TX_FEE_PER_KB(COIN.GetSatoshis() / 100 * RRC_COIN_RATE);
 /** -maxtxfee will warn if called with a higher fee than this amount (in
  * satoshis */
 static const Amount HIGH_MAX_TX_FEE(100 * HIGH_TX_FEE_PER_KB);

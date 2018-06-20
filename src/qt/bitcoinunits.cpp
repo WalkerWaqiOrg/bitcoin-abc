@@ -14,16 +14,14 @@ BitcoinUnits::BitcoinUnits(QObject *parent)
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits() {
     QList<BitcoinUnits::Unit> unitlist;
     unitlist.append(BCH);
-    unitlist.append(mBCH);
-    unitlist.append(uBCH);
+    unitlist.append(cBCH);
     return unitlist;
 }
 
 bool BitcoinUnits::valid(int unit) {
     switch (unit) {
         case BCH:
-        case mBCH:
-        case uBCH:
+        case cBCH:
             return true;
         default:
             return false;
@@ -34,10 +32,8 @@ QString BitcoinUnits::name(int unit) {
     switch (unit) {
         case BCH:
             return QString("BCH");
-        case mBCH:
-            return QString("mBCH");
-        case uBCH:
-            return QString::fromUtf8("μBCH");
+        case cBCH:
+            return QString("cBCH");
         default:
             return QString("???");
     }
@@ -47,11 +43,8 @@ QString BitcoinUnits::description(int unit) {
     switch (unit) {
         case BCH:
             return QString("Bitcoins");
-        case mBCH:
-            return QString("Milli-Bitcoins (1 / 1" THIN_SP_UTF8 "000)");
-        case uBCH:
-            return QString("Micro-Bitcoins (1 / 1" THIN_SP_UTF8
-                           "000" THIN_SP_UTF8 "000)");
+        case cBCH:
+            return QString("Cent-Bitcoins (1 / 1" THIN_SP_UTF8 "00)");
         default:
             return QString("???");
     }
@@ -60,24 +53,19 @@ QString BitcoinUnits::description(int unit) {
 qint64 BitcoinUnits::factor(int unit) {
     switch (unit) {
         case BCH:
-            return 100000000;
-        case mBCH:
-            return 100000;
-        case uBCH:
-            return 100;
+            return 1000;
+        case cBCH:
+            return 1;
         default:
-            return 100000000;
+            return 1000;
     }
 }
 
 int BitcoinUnits::decimals(int unit) {
     switch (unit) {
         case BCH:
-            return 8;
-        case mBCH:
-            return 5;
-        case uBCH:
             return 2;
+        case cBCH:
         default:
             return 0;
     }
