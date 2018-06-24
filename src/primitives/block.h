@@ -24,9 +24,9 @@ public:
     int32_t nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
-    uint64_t nAlreadyGeneratedCoins;
     uint32_t nTime;
     uint32_t nBits;
+    uint64_t nAlreadyGeneratedCoins;
     uint32_t nNonce;
 
     CBlockHeader() { SetNull(); }
@@ -38,9 +38,9 @@ public:
         READWRITE(this->nVersion);
         READWRITE(hashPrevBlock);
         READWRITE(hashMerkleRoot);
-        READWRITE(nAlreadyGeneratedCoins);
         READWRITE(nTime);
         READWRITE(nBits);
+        READWRITE(nAlreadyGeneratedCoins);
         READWRITE(nNonce);
     }
 
@@ -48,9 +48,9 @@ public:
         nVersion = 0;
         hashPrevBlock.SetNull();
         hashMerkleRoot.SetNull();
-        nAlreadyGeneratedCoins = 0;
         nTime = 0;
         nBits = 0;
+        nAlreadyGeneratedCoins = 0;
         nNonce = 0;
     }
 
@@ -95,9 +95,9 @@ public:
         block.nVersion = nVersion;
         block.hashPrevBlock = hashPrevBlock;
         block.hashMerkleRoot = hashMerkleRoot;
-        block.nAlreadyGeneratedCoins = nAlreadyGeneratedCoins;
         block.nTime = nTime;
         block.nBits = nBits;
+        block.nAlreadyGeneratedCoins = nAlreadyGeneratedCoins;
         block.nNonce = nNonce;
         return block;
     }

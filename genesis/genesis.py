@@ -110,18 +110,18 @@ def create_block_header(hash_merkle_root, time, bits, nonce, value):
     Bytes("version",4),
     Bytes("hash_prev_block", 32),
     Bytes("hash_merkle_root", 32),
-    Bytes("alreadyGeneratedCoins", 8),
     Bytes("time", 4),
     Bytes("bits", 4),
+    Bytes("alreadyGeneratedCoins", 8),
     Bytes("nonce", 4))
 
   genesisblock = block_header.parse('\x00'*88)
   genesisblock.version          = struct.pack('<I', 1)
   genesisblock.hash_prev_block  = struct.pack('<qqqq', 0,0,0,0)
   genesisblock.hash_merkle_root = hash_merkle_root
-  genesisblock.alreadyGeneratedCoins = struct.pack('<Q', value)
   genesisblock.time             = struct.pack('<I', time)
   genesisblock.bits             = struct.pack('<I', bits)
+  genesisblock.alreadyGeneratedCoins = struct.pack('<Q', value)
   genesisblock.nonce            = struct.pack('<I', nonce)
   return block_header.build(genesisblock)
 

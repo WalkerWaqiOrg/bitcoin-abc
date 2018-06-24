@@ -208,9 +208,9 @@ BlockAssembler::CreateNewBlock(const CScript &scriptPubKeyIn) {
 
     // Fill in header.
     pblock->hashPrevBlock = pindexPrev->GetBlockHash();
-    pblock->nAlreadyGeneratedCoins = pindexPrev->nAlreadyGeneratedCoins + baseReward.GetSatoshis();
     UpdateTime(pblock, *config, pindexPrev);
     pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, *config);
+    pblock->nAlreadyGeneratedCoins = pindexPrev->nAlreadyGeneratedCoins + baseReward.GetSatoshis();
     pblock->nNonce = 0;
     pblocktemplate->vTxSigOpsCount[0] =
         GetSigOpCountWithoutP2SH(*pblock->vtx[0]);

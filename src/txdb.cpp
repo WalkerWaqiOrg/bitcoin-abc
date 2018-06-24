@@ -301,12 +301,12 @@ bool CBlockTreeDB::LoadBlockIndexGuts(
         pindexNew->nUndoPos = diskindex.nUndoPos;
         pindexNew->nVersion = diskindex.nVersion;
         pindexNew->hashMerkleRoot = diskindex.hashMerkleRoot;
-        pindexNew->nAlreadyGeneratedCoins = diskindex.nAlreadyGeneratedCoins;
         pindexNew->nTime = diskindex.nTime;
         pindexNew->nBits = diskindex.nBits;
         pindexNew->nNonce = diskindex.nNonce;
         pindexNew->nStatus = diskindex.nStatus;
         pindexNew->nTx = diskindex.nTx;
+        pindexNew->nAlreadyGeneratedCoins = diskindex.nAlreadyGeneratedCoins;
 
         if (!CheckProofOfWork(pindexNew->GetBlockHash(), pindexNew->nBits,
                               config)) {
