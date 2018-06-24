@@ -2234,12 +2234,20 @@ static bool ConnectBlock(const Config &config, const CBlock &block,
              nInputs <= 1 ? 0 : 0.001 * (nTime3 - nTime2) / (nInputs - 1),
              nTimeConnect * 0.000001);
 
-    Amount blockReward =
-        nFees + GetBlockSubsidy(pindex->nHeight, consensusParams);
+    Amount baseReward = GetBlockSubsidy(pindex->nHeight, consensusParams);
+    Amount blockReward = nFees + baseReward;
     if (block.vtx[0]->GetValueOut() > blockReward) {
         return state.DoS(100, error("ConnectBlock(): coinbase pays too much "
                                     "(actual=%d vs limit=%d)",
                                     block.vtx[0]->GetValueOut(), blockReward),
+                         REJECT_INVALID, "bad-cb-amount");
+    }
+
+    Amount alreadyGeneratedCoins = Amount(pindex->pprev->nAlreadyGeneratedCoins) + baseReward;
+    if (Amount(block.nAlreadyGeneratedCoins) != alreadyGeneratedCoins) {
+        return state.DoS(100, error("ConnectBlock(): already generated coins isncorrect "
+                                    "(actual=%d vs limit=%d)",
+                                    block.nAlreadyGeneratedCoins, alreadyGeneratedCoins),
                          REJECT_INVALID, "bad-cb-amount");
     }
 
