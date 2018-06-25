@@ -6,12 +6,12 @@
 #include "primitives/block.h"
 
 #include "crypto/common.h"
-#include "hash.h"
+#include "rrhash.h"
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 
 uint256 CBlockHeader::GetHash() const {
-    return SerializeHash(*this);
+    return SerializeRRHash(*this);
 }
 
 std::string CBlock::ToString() const {
