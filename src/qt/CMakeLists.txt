@@ -5,6 +5,10 @@ project(bitcoin-qt)
 # This ensure that AUTOMOC doesn't run on generated files.
 cmake_policy(SET CMP0071 OLD)
 
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	add_definitions(-DQ_OS_MAC)
+endif()
+
 find_package(Qt5 COMPONENTS Widgets Network REQUIRED)
 
 # Localisation

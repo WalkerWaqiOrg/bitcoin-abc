@@ -273,7 +273,11 @@ endif()
 
 # bitcoind
 add_executable(bitcoind bitcoind.cpp)
-target_link_libraries(bitcoind server)
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	target_link_libraries(bitcoind server miniupnpc)
+else()
+	target_link_libraries(bitcoind server)
+endif()
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 	target_sources(bitcoind PRIVATE bitcoind-res.rc)
 endif()
