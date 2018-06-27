@@ -264,7 +264,7 @@ void OverviewPage::setWalletModel(WalletModel *model) {
                 SLOT(updateWatchOnlyLabels(bool)));
     }
 
-    // update the display unit, to not use the default ("BCH")
+    // update the display unit, to not use the default ("RRC")
     updateDisplayUnit();
 }
 
