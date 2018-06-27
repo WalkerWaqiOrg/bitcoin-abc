@@ -31,9 +31,9 @@ bool BitcoinUnits::valid(int unit) {
 QString BitcoinUnits::name(int unit) {
     switch (unit) {
         case BCH:
-            return QString("BCH");
+            return QString("RRC");
         case cBCH:
-            return QString("cBCH");
+            return QString("cRRC");
         default:
             return QString("???");
     }
@@ -42,9 +42,9 @@ QString BitcoinUnits::name(int unit) {
 QString BitcoinUnits::description(int unit) {
     switch (unit) {
         case BCH:
-            return QString("Bitcoins");
+            return QString("RRcoins");
         case cBCH:
-            return QString("Cent-Bitcoins (1 / 1" THIN_SP_UTF8 "00)");
+            return QString("Cent-RRcoins (1 / 1" THIN_SP_UTF8 "00)");
         default:
             return QString("???");
     }
@@ -53,11 +53,11 @@ QString BitcoinUnits::description(int unit) {
 qint64 BitcoinUnits::factor(int unit) {
     switch (unit) {
         case BCH:
-            return 1000;
+            return 100;
         case cBCH:
             return 1;
         default:
-            return 1000;
+            return 100;
     }
 }
 
