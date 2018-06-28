@@ -39,6 +39,7 @@
 #include "validationinterface.h"
 #include "versionbits.h"
 #include "warnings.h"
+#include "rrhash.h"
 
 #include <atomic>
 #include <sstream>
@@ -1669,7 +1670,7 @@ bool UndoReadFromDisk(CBlockUndo &blockundo, const CDiskBlockPos &pos,
     // Read block
     uint256 hashChecksum;
     // We need a CHashVerifier as reserializing may lose data
-    CHashVerifier<CAutoFile> verifier(&filein);
+    CRRHashVerifier<CAutoFile> verifier(&filein);
     try {
         verifier << hashBlock;
         verifier >> blockundo;

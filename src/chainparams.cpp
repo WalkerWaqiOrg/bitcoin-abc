@@ -103,7 +103,7 @@ public:
         consensus.BIP66Height = 0;              // 363725;
         consensus.antiReplayOpReturnSunsetHeight = 530000;
         consensus.antiReplayOpReturnCommitment = GetAntiReplayCommitment();
-        consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");  // uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.powLimit = uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");  // uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         // two weeks
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60;
         consensus.nPowTargetSpacing = 1 * 60;
@@ -164,10 +164,10 @@ public:
         nDefaultPort = 8333;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1525656448, 856190, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1525656448, 4696, 0x1f0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock ==
-               uint256S("000007b23c9d4f23eaf3979750aea675332aea7d81b87c2fbd4e4f910c612f7c"));
+               uint256S("000b3fe20846b0de138ba923d2a623c2612ccb17369753b1c904df6de690ab10"));
         assert(genesis.hashMerkleRoot ==
                uint256S("821d2f9486be20f121aeb41c7afc160826ce05507004e3c3569d63f1ddb6160c"));
 

@@ -7,11 +7,13 @@
 #define BITCOIN_RRHASH_H
 
 #include "hash.h"
+#include "cryptonote_lib/hash.h"
+#include <string>
 
 /** A writer stream (for serialization) that computes a 256-bit hash. */
 class CRRHashWriter {
 private:
-    CHash256 ctx;
+    std::string buffer;
 
     const int nType;
     const int nVersion;
@@ -24,13 +26,13 @@ public:
     int GetVersion() const { return nVersion; }
 
     void write(const char *pch, size_t size) {
-        ctx.Write((const uint8_t *)pch, size);
+        buffer.append(pch,size);
     }
 
     // invalidates the object
     uint256 GetHash() {
         uint256 result;
-        ctx.Finalize((uint8_t *)&result);
+	    crypto::cn_slow_hash((const void *)buffer.data(), buffer.length(), *(crypto::hash*)&result);
         return result;
     }
 
