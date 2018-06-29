@@ -13,6 +13,10 @@
 #include <cassert>
 
 #include "chainparamsseeds.h"
+#include <iostream>
+#include "hash.h"
+#include "config.h"
+#include "arith_uint256.h"
 
 // Far into the future.
 static const std::string ANTI_REPLAY_COMMITMENT =
@@ -65,6 +69,7 @@ static CBlock CreateGenesisBlock(const char *pszTimestamp,
  *     CTxOut(nValue=50.00000000, scriptPubKey=0x5F1DF16B2B704C8A578D0B)
  *   vMerkleTree: 4a5e1e
  */
+static const uint256 MAIN_NET_WORK_POW_LIMIT = uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce,
                                  uint32_t nBits, int32_t nVersion,
                                  const Amount genesisReward) {
@@ -72,6 +77,27 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce,
     const CScript genesisOutputScript = CScript() << ParseHex("0432c10dbbb8b2f06b8baba9fdb56ab925f78ae1b59fb4694625d05da0f98ee40ab4880752649529f36adee062b6f0531f4a088ae954ee86f70f41a5ad628e25f6") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce,
                               nBits, nVersion, genesisReward);
+}
+
+bool RRCheckProofOfWork(uint256 hash, uint32_t nBits) {
+    bool fNegative;
+    bool fOverflow;
+    arith_uint256 bnTarget;
+    bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
+
+    // Check range
+    if (fNegative || bnTarget == 0 || fOverflow ||
+        bnTarget >
+            UintToArith256(MAIN_NET_WORK_POW_LIMIT)) {
+        return false;
+    }
+
+    // Check proof of work matches claimed amount
+    if (UintToArith256(hash) > bnTarget) {
+        return false;
+    }
+
+    return true;
 }
 
 void CChainParams::UpdateBIP9Parameters(Consensus::DeploymentPos d,
@@ -103,7 +129,7 @@ public:
         consensus.BIP66Height = 0;              // 363725;
         consensus.antiReplayOpReturnSunsetHeight = 530000;
         consensus.antiReplayOpReturnCommitment = GetAntiReplayCommitment();
-        consensus.powLimit = uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");  // uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.powLimit = MAIN_NET_WORK_POW_LIMIT;  // uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         // two weeks
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60;
         consensus.nPowTargetSpacing = 1 * 60;
@@ -164,8 +190,18 @@ public:
         nDefaultPort = 8333;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1525656448, 4696, 0x1f0ffff0, 1, 50 * COIN);
+        //genesis = CreateGenesisBlock(1525656448, 856190, 0x1e0ffff0, 1, 50 * COIN);
+        std::cout<<"###############start get block hash##############" << std::endl;
+        genesis = CreateGenesisBlock(1525656448, 0, 0x1f0ffff0, 1, 50 * COIN);
+        while(!RRCheckProofOfWork(genesis.GetHash(), genesis.nBits)) {
+            ++genesis.nNonce;
+        }
         consensus.hashGenesisBlock = genesis.GetHash();
+        std::cout<<"#############################" << std::endl;
+        std::cout<<"genesis.nNonce :" << genesis.nNonce<< std::endl;;
+        std::cout<< "hashGenesisBlock : " << consensus.hashGenesisBlock.GetHex()<< std::endl;;
+        std::cout<< "hashMerkleRoot : " << genesis.hashMerkleRoot.GetHex()<< std::endl;;
+        std::cout<<"#############################" << std::endl;
         assert(consensus.hashGenesisBlock ==
                uint256S("000b3fe20846b0de138ba923d2a623c2612ccb17369753b1c904df6de690ab10"));
         assert(genesis.hashMerkleRoot ==
