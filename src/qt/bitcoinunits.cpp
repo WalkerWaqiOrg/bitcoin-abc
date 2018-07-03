@@ -66,8 +66,9 @@ int BitcoinUnits::decimals(int unit) {
         case BCH:
             return 2;
         case cBCH:
-        default:
             return 0;
+        default:
+            return 2;
     }
 }
 
@@ -87,7 +88,7 @@ QString BitcoinUnits::format(int unit, const Amount nIn, bool fPlus,
     qint64 remainder = n_abs % coin;
     QString quotient_str = QString::number(quotient);
     QString remainder_str =
-        QString::number(remainder).rightJustified(num_decimals, '0');
+        (num_decimals > 0)?(QString::number(remainder).rightJustified(num_decimals, '0')):"";
 
     // Use SI-style thin space separators as these are locale independent and
     // can't be confused with the decimal marker.
@@ -106,7 +107,7 @@ QString BitcoinUnits::format(int unit, const Amount nIn, bool fPlus,
         quotient_str.insert(0, '+');
     }
 
-    return quotient_str + QString(".") + remainder_str;
+    return remainder_str.isEmpty()?quotient_str:(quotient_str + QString(".") + remainder_str);
 }
 
 // NOTE: Using formatWithUnit in an HTML context risks wrapping
