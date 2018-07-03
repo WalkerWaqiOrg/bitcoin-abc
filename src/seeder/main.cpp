@@ -442,7 +442,7 @@ extern "C" void *ThreadStats(void *) {
 }
 
 static const std::string mainnet_seeds[] = {
-    "node5.rrnc.io",    ""};
+    "seed.node5.rrnc.io",""};
 static const std::string testnet_seeds[] = {
     "testnet-seed.bitcoinabc.org",    "testnet-seed-abc.bitcoinforks.org",
     "testnet-seed.bitprim.org",       "testnet-seed.deadalnix.me",
