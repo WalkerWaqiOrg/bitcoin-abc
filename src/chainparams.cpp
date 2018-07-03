@@ -191,6 +191,7 @@ public:
         // // criptolayer.net
         // vSeeds.push_back(
         //     CDNSSeedData("criptolayer.net", "seeder.criptolayer.net", true));
+	vSeeds.push_back(CDNSSeedData("node5.rrnc.io ", "node5.rrnc.io ", true));	
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<uint8_t>(1, 0);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<uint8_t>(1, 5);
