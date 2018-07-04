@@ -40,8 +40,7 @@ Amount CFeeRate::GetFee(size_t nBytes_) const {
         }
     }
 
-    nFee = nFee >> COIN_RIGHT_SHIFT;
-    return std::max(Amount(1),nFee);
+    return nFee;
 }
 
 std::string CFeeRate::ToString() const {
