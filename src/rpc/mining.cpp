@@ -787,6 +787,7 @@ static UniValue getblocktemplate(const Config &config,
     result.push_back(Pair("curtime", pblock->GetBlockTime()));
     result.push_back(Pair("bits", strprintf("%08x", pblock->nBits)));
     result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight + 1)));
+    result.push_back(Pair("alreadyGeneratedCoins", pblock->nAlreadyGeneratedCoins));
 
     return result;
 }
