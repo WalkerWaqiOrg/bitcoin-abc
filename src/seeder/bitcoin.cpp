@@ -173,7 +173,7 @@ class CSeederNode {
                 //        printf("%s: got address %s\n", ToString(you).c_str(),
                 //        addr.ToString().c_str(), (int)(vAddr->size()));
                 it++;
-                printf("handle message #####ip is %s  ########\n",it->ToStringIP().c_str());
+                printf("handle message #####ip is %s  ########\n",it->ToString().c_str());
                 if (addr.nTime <= 100000000 || addr.nTime > now + 600)
                 {
                     addr.nTime = now - 5 * 86400;
