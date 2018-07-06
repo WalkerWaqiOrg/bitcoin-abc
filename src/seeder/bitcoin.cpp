@@ -168,17 +168,26 @@ class CSeederNode {
                 if (doneAfter == 0 || doneAfter > now + 1) doneAfter = now + 1;
             }
             while (it != vAddrNew.end()) {
+                printf("handle message777777777777\n");
                 CAddress &addr = *it;
                 //        printf("%s: got address %s\n", ToString(you).c_str(),
                 //        addr.ToString().c_str(), (int)(vAddr->size()));
                 it++;
+                printf("handle message #####ip is %s  ########\n",it->ToStringIP().c_str());
                 if (addr.nTime <= 100000000 || addr.nTime > now + 600)
+                {
                     addr.nTime = now - 5 * 86400;
-                if (addr.nTime > now - 604800) vAddr->push_back(addr);
+                    printf("handle message888888888888\n");
+                }
+                if (addr.nTime > now - 604800){
+                    vAddr->push_back(addr);
+                    printf("handle message9999999999999\n");
+                } 
                 //        printf("%s: added address %s (#%i)\n",
                 //        ToString(you).c_str(), addr.ToString().c_str(),
                 //        (int)(vAddr->size()));
                 if (vAddr->size() > 1000) {
+                    printf("handle messageaaaaaaaaaaa\n");
                     doneAfter = 1;
                     return true;
                 }
