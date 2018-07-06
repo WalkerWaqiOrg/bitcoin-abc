@@ -252,17 +252,21 @@ public:
     }
 
     bool Run() {
+        printf("TestNode_run_1111111111\n");
         bool proxyConnectionFailed = false;
         if (!ConnectSocket(you, sock, nConnectTimeout,
                            &proxyConnectionFailed)) {
+            printf("TestNode_run_22222222222\n");                   
             return false;
         }
-
+        printf("TestNode_run_3333333333333\n");
         PushVersion();
+        printf("TestNode_run_4444444444444\n");
         Send();
-
+        printf("TestNode_run_555555555555\n");
         bool res = true;
         int64_t now;
+        printf("TestNode_run_6666666666\n");
         while (now = time(nullptr),
                ban == 0 && (doneAfter == 0 || doneAfter > now) &&
                    sock != INVALID_SOCKET) {
@@ -270,6 +274,7 @@ public:
             fd_set set;
             FD_ZERO(&set);
             FD_SET(sock, &set);
+            printf("TestNode_run_777777777777\n");
             struct timeval wa;
             if (doneAfter) {
                 wa.tv_sec = doneAfter - now;
@@ -283,28 +288,41 @@ public:
                 if (!doneAfter) res = false;
                 break;
             }
+            printf("TestNode_run_8888888888\n");
             int nBytes = recv(sock, pchBuf, sizeof(pchBuf), 0);
             int nPos = vRecv.size();
             if (nBytes > 0) {
                 vRecv.resize(nPos + nBytes);
                 memcpy(&vRecv[nPos], pchBuf, nBytes);
+                printf("TestNode_run_99999999999\n");
             } else if (nBytes == 0) {
                 // printf("%s: BAD (connection closed prematurely)\n",
                 // ToString(you).c_str());
                 res = false;
+                printf("TestNode_run_aaaaaaaaaa\n");
                 break;
             } else {
                 // printf("%s: BAD (connection error)\n",
                 // ToString(you).c_str());
                 res = false;
                 break;
+                printf("TestNode_run_bbbbbbbbbb\n");
             }
+            printf("TestNode_run_cccccccccc\n");
             ProcessMessages();
+            printf("TestNode_run_dddddd\n");
             Send();
+            printf("TestNode_run_eeeeeeee\n");
         }
-        if (sock == INVALID_SOCKET) res = false;
+        if (sock == INVALID_SOCKET) 
+        {
+            res = false;
+            printf("TestNode_run_fffffffff\n");
+        }
         close(sock);
+        printf("TestNode_run_gggggggggggggg\n");
         sock = INVALID_SOCKET;
+        printf("TestNode_run: ban is %d ,res is %d\n",ban,res);
         return (ban == 0) && res;
     }
 
