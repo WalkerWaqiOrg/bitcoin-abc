@@ -321,19 +321,27 @@ bool TestNode(const CService &cip, int &ban, int &clientV,
               std::string &clientSV, int &blocks,
               std::vector<CAddress> *vAddr) {
     try {
+        printf("TestNode11111111111111\n");
         CSeederNode node(cip, vAddr);
+        printf("TestNode222222222222222\n");
         bool ret = node.Run();
+         printf("TestNode33333333333333\n");
         if (!ret) {
+            printf("TestNode4444444444444\n");
             ban = node.GetBan();
         } else {
+            printf("TestNode555555555555\n");
             ban = 0;
         }
+        printf("TestNode666666666666\n");
         clientV = node.GetClientVersion();
         clientSV = node.GetClientSubVersion();
         blocks = node.GetStartingHeight();
+        printf("TestNode777777777777777\n");
         //  printf("%s: %s!!!\n", cip.ToString().c_str(), ret ? "GOOD" : "BAD");
         return ret;
     } catch (std::ios_base::failure &e) {
+        printf("TestNode888888888888\n");
         ban = 0;
         return false;
     }
