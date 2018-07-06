@@ -468,6 +468,7 @@ extern "C" void *ThreadSeeder(void *) {
             printf("ThreadSeeder2222222222222222\n");
             for (auto &ip : ips) {
                 printf("ThreadSeeder33333333333333\n");
+                printf("ip is %d",ip.ip[12]);
                 db.Add(CAddress(CService(ip, GetDefaultPort()), ServiceFlags()),
                        true);
             }

@@ -120,7 +120,9 @@ class CSeederNode {
     bool ProcessMessage(std::string strCommand, CDataStream &vRecv) {
         //    printf("%s: RECV %s\n", ToString(you).c_str(),
         //    strCommand.c_str());
+        printf("handle message1111111111\n");
         if (strCommand == "version") {
+            printf("handle message222222222\n");
             int64_t nTime;
             CAddress addrMe;
             CAddress addrFrom;
@@ -134,11 +136,13 @@ class CSeederNode {
             if (nVersion >= 209 && !vRecv.empty()) vRecv >> nStartingHeight;
 
             if (nVersion >= 209) {
+                printf("handle message333333333\n");
                 BeginMessage("verack");
                 EndMessage();
             }
             vSend.SetVersion(std::min(nVersion, PROTOCOL_VERSION));
             if (nVersion < 209) {
+                printf("handle message4444444444\n");
                 this->vRecv.SetVersion(std::min(nVersion, PROTOCOL_VERSION));
                 GotVersion();
             }
@@ -146,12 +150,14 @@ class CSeederNode {
         }
 
         if (strCommand == "verack") {
+            printf("handle message555555555555\n");
             this->vRecv.SetVersion(std::min(nVersion, PROTOCOL_VERSION));
             GotVersion();
             return false;
         }
 
         if (strCommand == "addr" && vAddr) {
+            printf("handle message666666666\n");
             std::vector<CAddress> vAddrNew;
             vRecv >> vAddrNew;
             // printf("%s: got %i addresses\n", ToString(you).c_str(),
@@ -184,17 +190,22 @@ class CSeederNode {
     }
 
     bool ProcessMessages() {
+        printf("ProcessMessages111111111111\n");
         if (vRecv.empty()) {
+            printf("ProcessMessages2222222222\n");
             return false;
         }
 
         do {
+            printf("ProcessMessages33333333333\n");
             CDataStream::iterator pstart = std::search(
                 vRecv.begin(), vRecv.end(), BEGIN(netMagic), END(netMagic));
             uint32_t nHeaderSize = GetSerializeSize(
                 CMessageHeader(netMagic), vRecv.GetType(), vRecv.GetVersion());
             if (vRecv.end() - pstart < nHeaderSize) {
+                printf("ProcessMessages444444444\n");
                 if (vRecv.size() > nHeaderSize) {
+                    printf("ProcessMessages55555555\n");
                     vRecv.erase(vRecv.begin(), vRecv.end() - nHeaderSize);
                 }
                 break;
@@ -204,7 +215,9 @@ class CSeederNode {
                                           vRecv.begin() + nHeaderSize);
             CMessageHeader hdr(netMagic);
             vRecv >> hdr;
+            printf("ProcessMessages66666666666\n");
             if (!hdr.IsValidWithoutConfig(netMagic)) {
+                printf("ProcessMessages7777777777\n");
                 // printf("%s: BAD (invalid header)\n", ToString(you).c_str());
                 ban = 100000;
                 return true;
@@ -212,17 +225,20 @@ class CSeederNode {
             std::string strCommand = hdr.GetCommand();
             unsigned int nMessageSize = hdr.nMessageSize;
             if (nMessageSize > MAX_SIZE) {
+                printf("ProcessMessages88888888\n");
                 // printf("%s: BAD (message too large)\n",
                 // ToString(you).c_str());
                 ban = 100000;
                 return true;
             }
             if (nMessageSize > vRecv.size()) {
+                printf("ProcessMessages9999999999\n");
                 vRecv.insert(vRecv.begin(), vHeaderSave.begin(),
                              vHeaderSave.end());
                 break;
             }
             if (vRecv.GetVersion() >= 209) {
+                printf("ProcessMessagesaaaaaaaaa\n");
                 uint256 hash =
                     Hash(vRecv.begin(), vRecv.begin() + nMessageSize);
                 if (memcmp(hash.begin(), hdr.pchChecksum,
@@ -230,9 +246,11 @@ class CSeederNode {
                     continue;
                 }
             }
+            printf("ProcessMessagesbbbbbbbbbb\n");
             CDataStream vMsg(vRecv.begin(), vRecv.begin() + nMessageSize,
                              vRecv.GetType(), vRecv.GetVersion());
             vRecv.ignore(nMessageSize);
+            printf("ProcessMessagesccccccccccc\n");
             if (ProcessMessage(strCommand, vMsg)) return true;
             //      printf("%s: done processing %s\n", ToString(you).c_str(),
             //      strCommand.c_str());
