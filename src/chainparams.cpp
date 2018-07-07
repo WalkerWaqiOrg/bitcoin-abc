@@ -158,8 +158,8 @@ public:
         diskMagic[2] = 0x71;
         diskMagic[3] = 0x69;
         netMagic[0] = 0xe3;
-        netMagic[1] = 0xe1;
-        netMagic[2] = 0xf3;
+        netMagic[1] = 0xb1;
+        netMagic[2] = 0xa3;
         netMagic[3] = 0xe8;
         nDefaultPort = 8333;
         nPruneAfterHeight = 100000;
