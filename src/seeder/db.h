@@ -120,6 +120,7 @@ public:
         }
         if (!(services & NODE_NETWORK)) 
         {   
+            printf("services is %d ; NODE_NETWORK is %d\n",services,NODE_NETWORK);
             printf("IsGood2222222222\n");
             return false;
         }
