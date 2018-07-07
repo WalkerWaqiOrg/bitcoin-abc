@@ -113,19 +113,62 @@ public:
     }
 
     bool IsGood() const {
-        if (ip.GetPort() != GetDefaultPort()) return false;
-        if (!(services & NODE_NETWORK)) return false;
-        if (!ip.IsRoutable()) return false;
-        if (clientVersion && clientVersion < REQUIRE_VERSION) return false;
-        if (blocks && blocks < GetRequireHeight()) return false;
+        if (ip.GetPort() != GetDefaultPort())  
+        {   
+            printf("IsGood111111111\n");
+            return false;
+        }
+        if (!(services & NODE_NETWORK)) 
+        {   
+            printf("IsGood2222222222\n");
+            return false;
+        }
+        if (!ip.IsRoutable()) 
+        {   
+            printf("IsGood333333333\n");
+            return false;
+        }
+        if (clientVersion && clientVersion < REQUIRE_VERSION) 
+        {   
+            printf("IsGood444444444\n");
+            return false;
+        }
+        if (blocks && blocks < GetRequireHeight()) 
+        {   
+            printf("IsGood5555555555\n");
+            return false;
+        }
+        if (total <= 3 && success * 2 >= total) 
+        {   
+            printf("IsGood6666666666\n");
+            return true;
+        }
 
-        if (total <= 3 && success * 2 >= total) return true;
-
-        if (stat2H.reliability > 0.85 && stat2H.count > 2) return true;
-        if (stat8H.reliability > 0.70 && stat8H.count > 4) return true;
-        if (stat1D.reliability > 0.55 && stat1D.count > 8) return true;
-        if (stat1W.reliability > 0.45 && stat1W.count > 16) return true;
-        if (stat1M.reliability > 0.35 && stat1M.count > 32) return true;
+        if (stat2H.reliability > 0.85 && stat2H.count > 2) 
+        {   
+            printf("IsGood77777777777\n");
+            return true;
+        }
+        if (stat8H.reliability > 0.70 && stat8H.count > 4) 
+        {   
+            printf("IsGood888888888\n");
+            return true;
+        }
+        if (stat1D.reliability > 0.55 && stat1D.count > 8) 
+        {   
+            printf("IsGood9999999999\n");
+            return true;
+        }
+        if (stat1W.reliability > 0.45 && stat1W.count > 16) 
+        {   
+            printf("IsGoodaaaaaaaa\n");
+            return true;
+        }
+        if (stat1M.reliability > 0.35 && stat1M.count > 32) 
+        {   
+            printf("IsGoodbbbbbbbbbbb\n");
+            return true;
+        }
 
         return false;
     }
@@ -424,11 +467,14 @@ public:
 
     void ResultMany(const std::vector<CServiceResult> &ips) {
         LOCK(cs);
+        printf("ResultMany11111111111111\n");
         for (size_t i = 0; i < ips.size(); i++) {
             if (ips[i].fGood) {
+                printf("ResultMany22222222222222\n");
                 Good_(ips[i].service, ips[i].nClientV, ips[i].strClientV,
                       ips[i].nHeight);
             } else {
+                printf("ResultMany333333333333\n");
                 Bad_(ips[i].service, ips[i].nBanTime);
             }
         }
