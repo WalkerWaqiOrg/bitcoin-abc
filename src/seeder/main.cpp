@@ -294,53 +294,67 @@ public:
 extern "C" uint32_t GetIPList(void *data, char *requestedHostname, addr_t *addr,
                               uint32_t max, uint32_t ipv4, uint32_t ipv6) {
     CDnsThread *thread = (CDnsThread *)data;
-
+    printf("GetIPList11111111111111111\n");
     uint64_t requestedFlags = 0;
     int hostlen = strlen(requestedHostname);
     if (hostlen > 1 && requestedHostname[0] == 'x' &&
         requestedHostname[1] != '0') {
         char *pEnd;
+        printf("GetIPList22222222222222\n");
         uint64_t flags = (uint64_t)strtoull(requestedHostname + 1, &pEnd, 16);
         if (*pEnd == '.' && pEnd <= requestedHostname + 17 &&
             std::find(thread->filterWhitelist.begin(),
                       thread->filterWhitelist.end(),
                       flags) != thread->filterWhitelist.end()) {
+            printf("GetIPList333333333333333\n");
             requestedFlags = flags;
         } else {
+            printf("GetIPList444444444444444\n");
             return 0;
         }
     } else if (strcasecmp(requestedHostname, thread->dns_opt.host)) {
+        printf("GetIPList55555555555555\n");
         return 0;
     }
     thread->cacheHit(requestedFlags);
+    printf("GetIPList6666666666666\n");
     auto &thisflag = thread->perflag[requestedFlags];
     uint32_t size = thisflag.cache.size();
     uint32_t maxmax = (ipv4 ? thisflag.nIPv4 : 0) + (ipv6 ? thisflag.nIPv6 : 0);
     if (max > size) {
+        printf("GetIPList7777777777777\n");
         max = size;
     }
     if (max > maxmax) {
+        printf("GetIPList88888888888888\n");
         max = maxmax;
     }
     uint32_t i = 0;
+    printf("GetIPList999999999999####max is %d########\n",max);
     while (i < max) {
         uint32_t j = i + (rand() % (size - i));
+        printf("GetIPListaaaaaaaaaaaa\n");
         do {
             bool ok = (ipv4 && thisflag.cache[j].v == 4) ||
                       (ipv6 && thisflag.cache[j].v == 6);
             if (ok) {
+                printf("GetIPListbbbbbbbbbbbbbb\n");
                 break;
             }
             j++;
             if (j == size) {
+                printf("GetIPListcccccccccccccc\n");
                 j = i;
             }
+            printf("GetIPListdddddddddddddd\n");
         } while (1);
         addr[i] = thisflag.cache[j];
         thisflag.cache[j] = thisflag.cache[i];
         thisflag.cache[i] = addr[i];
         i++;
+        printf("GetIPListeeeeeeeeeeeee\n");
     }
+    printf("GetIPListffffffffff\n");
     return max;
 }
 
