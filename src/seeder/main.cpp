@@ -232,13 +232,16 @@ public:
 
     void cacheHit(uint64_t requestedFlags, bool force = false) {
         static bool nets[NET_MAX] = {};
+        printf("cacheHit11111111111111111\n");
         if (!nets[NET_IPV4]) {
+            printf("cacheHit22222222222222\n");
             nets[NET_IPV4] = true;
             nets[NET_IPV6] = true;
         }
         time_t now = time(nullptr);
         FlagSpecificData &thisflag = perflag[requestedFlags];
         thisflag.cacheHits++;
+        printf("cacheHit333333333333333\n");
         if (force ||
             thisflag.cacheHits * 400 >
                 (thisflag.cache.size() * thisflag.cache.size()) ||
@@ -246,6 +249,7 @@ public:
                  thisflag.cache.size() &&
              (now - thisflag.cacheTime > 5))) {
             std::set<CNetAddr> ips;
+            printf("cacheHit4444444444444444\n");
             db.GetIPs(ips, requestedFlags, 1000, nets);
             dbQueries++;
             thisflag.cache.clear();
@@ -253,16 +257,20 @@ public:
             thisflag.nIPv6 = 0;
             thisflag.cache.reserve(ips.size());
             for (auto &ip : ips) {
+                printf("cacheHit55555555555\n");
+                printf("ip is %s \n",ip.ToString().c_str());
                 struct in_addr addr;
                 struct in6_addr addr6;
                 if (ip.GetInAddr(&addr)) {
                     addr_t a;
+                    printf("cacheHit66666666666\n");
                     a.v = 4;
                     memcpy(&a.data.v4, &addr, 4);
                     thisflag.cache.push_back(a);
                     thisflag.nIPv4++;
                 } else if (ip.GetIn6Addr(&addr6)) {
                     addr_t a;
+                    printf("cacheHit7777777777\n");
                     a.v = 6;
                     memcpy(&a.data.v6, &addr6, 16);
                     thisflag.cache.push_back(a);
@@ -271,6 +279,7 @@ public:
             }
             thisflag.cacheHits = 0;
             thisflag.cacheTime = now;
+            printf("cacheHit888888888\n");
         }
     }
 

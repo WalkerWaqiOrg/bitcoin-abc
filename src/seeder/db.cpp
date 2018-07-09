@@ -185,51 +185,68 @@ void CAddrDb::Add_(const CAddress &addr, bool force) {
 
 void CAddrDb::GetIPs_(std::set<CNetAddr> &ips, uint64_t requestedFlags,
                       uint32_t max, const bool *nets) {
+    printf("GetIPs_111111111111\n");
     if (goodId.size() == 0) {
         int id = -1;
+        printf("GetIPs_222222222222\n");
         if (ourId.size() == 0) {
+            printf("GetIPs_333333333333\n");
             if (unkId.size() == 0) {
+                printf("GetIPs_444444444444\n");
                 return;
             }
+            printf("GetIPs_555555555555\n");
             id = *unkId.begin();
         } else {
+            printf("GetIPs_66666666666\n");
             id = *ourId.begin();
         }
 
         if (id >= 0 &&
             (idToInfo[id].services & requestedFlags) == requestedFlags) {
+            printf("GetIPs_7777777777\n");
             ips.insert(idToInfo[id].ip);
         }
         return;
     }
 
     std::vector<int> goodIdFiltered;
+    printf("GetIPs_88888888\n");
     for (auto &id : goodId) {
+        printf("GetIPs_9999999999\n");
         if ((idToInfo[id].services & requestedFlags) == requestedFlags) {
+            printf("GetIPs_aaaaaaaaa\n");
             goodIdFiltered.push_back(id);
         }
     }
 
     if (!goodIdFiltered.size()) {
+        printf("GetIPs_bbbbbbb\n");
         return;
     }
 
     if (max > goodIdFiltered.size() / 2) {
+        printf("GetIPs_cccccccc\n");
         max = goodIdFiltered.size() / 2;
     }
 
     if (max < 1) {
+        printf("GetIPs_dddddddd\n");
         max = 1;
     }
 
     std::set<int> ids;
+    printf("GetIPs_eeeeeee\n");
     while (ids.size() < max) {
+        printf("GetIPs_fffffff\n");
         ids.insert(goodIdFiltered[rand() % goodIdFiltered.size()]);
     }
 
     for (auto &id : ids) {
         CService &ip = idToInfo[id].ip;
+        printf("GetIPs_gggggg\n");
         if (nets[ip.GetNetwork()]) {
+            printf("GetIPs_hhhhhhhh\n");
             ips.insert(ip);
         }
     }
