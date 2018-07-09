@@ -79,6 +79,7 @@ int CAddrDb::Lookup_(const CService &ip) {
 
 void CAddrDb::Good_(const CService &addr, int clientV, std::string clientSV,
                     int blocks) {
+    printf("Good_1111111111111111\n");
     int id = Lookup_(addr);
     if (id == -1) return;
     unkId.erase(id);
@@ -87,14 +88,18 @@ void CAddrDb::Good_(const CService &addr, int clientV, std::string clientSV,
     info.clientVersion = clientV;
     info.clientSubVersion = clientSV;
     info.blocks = blocks;
+    printf("Good_22222222222\n");
     info.Update(true);
+    printf("Good_333333333333\n");
     if (info.IsGood() && goodId.count(id) == 0) {
+        printf("Good_44444444444444\n");
         goodId.insert(id);
         //    printf("%s: good; %i good nodes now\n", ToString(addr).c_str(),
         //    (int)goodId.size());
     }
     nDirty++;
     ourId.push_back(id);
+    printf("Good_555555555555555\n");
 }
 
 void CAddrDb::Bad_(const CService &addr, int ban) {
@@ -171,8 +176,10 @@ void CAddrDb::Add_(const CAddress &addr, bool force) {
     int id = nId++;
     idToInfo[id] = ai;
     ipToId[ipp] = id;
-    //  printf("%s: added\n", ToString(ipp).c_str(), ipToId[ipp]);
+    printf("############################\n");
+    printf("%s: added\n", ToString(ipp).c_str());
     unkId.insert(id);
+    printf("############################\n");
     nDirty++;
 }
 

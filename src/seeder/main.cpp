@@ -174,30 +174,38 @@ extern "C" void *ThreadCrawler(void *data) {
     do {
         std::vector<CServiceResult> ips;
         int wait = 5;
+        printf("ThreadCrawler11111111111111\n");
         db.GetMany(ips, 16, wait);
         int64_t now = time(nullptr);
+        printf("ThreadCrawler22222222222222\n");
         if (ips.empty()) {
+            printf("ThreadCrawler333333333333\n");
             wait *= 1000;
             wait += rand() % (500 * *nThreads);
             Sleep(wait);
             continue;
         }
-
+        printf("ThreadCrawler44444444444444\n");
         std::vector<CAddress> addr;
         for (size_t i = 0; i < ips.size(); i++) {
+            printf("ThreadCrawler555555555555555\n");
             CServiceResult &res = ips[i];
             res.nBanTime = 0;
             res.nClientV = 0;
             res.nHeight = 0;
             res.strClientV = "";
             bool getaddr = res.ourLastSuccess + 86400 < now;
+            printf("ThreadCrawler6666666666666666\n");
             res.fGood = TestNode(res.service, res.nBanTime, res.nClientV,
                                  res.strClientV, res.nHeight,
                                  getaddr ? &addr : nullptr);
+            printf("ThreadCrawler7777777777777777\n");
         }
-
+        printf("ThreadCrawler888888888888888\n");
         db.ResultMany(ips);
+        printf("ThreadCrawler9999999999999999\n");
         db.Add(addr);
+        printf("ThreadCrawleraaaaaaaaaaaaaaaaa\n");
     } while (1);
     return nullptr;
 }
@@ -442,7 +450,7 @@ extern "C" void *ThreadStats(void *) {
 }
 
 static const std::string mainnet_seeds[] = {
-    "seed.node5.rrnc.io",    ""};
+    "114.115.209.211", "114.115.184.59",   ""};
 static const std::string testnet_seeds[] = {
     "testnet-seed.bitcoinabc.org",    "testnet-seed-abc.bitcoinforks.org",
     "testnet-seed.bitprim.org",       "testnet-seed.deadalnix.me",
@@ -454,11 +462,16 @@ const static unsigned int MAX_HOSTS_PER_SEED = 128;
 extern "C" void *ThreadSeeder(void *) {
     do {
         for (int i = 0; seeds[i] != ""; i++) {
+            printf("ThreadSeeder111111111111111\n");
             std::vector<CNetAddr> ips;
             LookupHost(seeds[i].c_str(), ips, MAX_HOSTS_PER_SEED, true);
+            printf("ThreadSeeder2222222222222222\n");
             for (auto &ip : ips) {
+                printf("ThreadSeeder33333333333333\n");
+                printf("ip is %s\n",ip.ToString().c_str());
                 db.Add(CAddress(CService(ip, GetDefaultPort()), ServiceFlags()),
                        true);
+                printf("ThreadSeeder44444444444\n");
             }
         }
         Sleep(1800000);
