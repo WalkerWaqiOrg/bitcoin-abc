@@ -113,6 +113,7 @@ public:
     }
 
     bool IsGood() const {
+        return true;
         if (ip.GetPort() != GetDefaultPort())  
         {   
             printf("IsGood111111111\n");

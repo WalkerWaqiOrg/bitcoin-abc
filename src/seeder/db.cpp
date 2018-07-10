@@ -214,10 +214,10 @@ void CAddrDb::GetIPs_(std::set<CNetAddr> &ips, uint64_t requestedFlags,
     printf("GetIPs_88888888\n");
     for (auto &id : goodId) {
         printf("GetIPs_9999999999\n");
-        if ((idToInfo[id].services & requestedFlags) == requestedFlags) {
+        //if ((idToInfo[id].services & requestedFlags) == requestedFlags) {
             printf("GetIPs_aaaaaaaaa\n");
             goodIdFiltered.push_back(id);
-        }
+       // }
     }
 
     if (!goodIdFiltered.size()) {
