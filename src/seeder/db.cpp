@@ -225,12 +225,10 @@ void CAddrDb::GetIPs_(std::set<CNetAddr> &ips, uint64_t requestedFlags,
         return;
     }
 
-    /*
-    if (max > goodIdFiltered.size() / 2) {
+    if (max > goodIdFiltered.size() ) {
         printf("GetIPs_cccccccc\n");
-        max = goodIdFiltered.size() / 2;
+        max = goodIdFiltered.size();
     }
-    */
 
     if (max < 1) {
         printf("GetIPs_dddddddd\n");
