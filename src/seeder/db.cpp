@@ -201,7 +201,7 @@ void CAddrDb::GetIPs_(std::set<CNetAddr> &ips, uint64_t requestedFlags,
             printf("GetIPs_66666666666\n");
             id = *ourId.begin();
         }
-
+        printf("idToInfo[id].services is %d, requestedFlags is %d\n",idToInfo[id].services,requestedFlags);
         if (id >= 0 &&
             (idToInfo[id].services & requestedFlags) == requestedFlags) {
             printf("GetIPs_7777777777\n");
@@ -214,6 +214,7 @@ void CAddrDb::GetIPs_(std::set<CNetAddr> &ips, uint64_t requestedFlags,
     printf("GetIPs_88888888\n");
     for (auto &id : goodId) {
         printf("GetIPs_9999999999\n");
+        printf("idToInfo[id].services is %d, requestedFlags is %d\n",idToInfo[id].services,requestedFlags);
         //if ((idToInfo[id].services & requestedFlags) == requestedFlags) {
             printf("GetIPs_aaaaaaaaa\n");
             goodIdFiltered.push_back(id);
