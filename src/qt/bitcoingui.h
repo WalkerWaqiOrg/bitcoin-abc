@@ -17,6 +17,7 @@
 #include <QMenu>
 #include <QPoint>
 #include <QSystemTrayIcon>
+#include <QToolButton>
 
 class ClientModel;
 class NetworkStyle;
@@ -84,6 +85,8 @@ protected:
     bool eventFilter(QObject *object, QEvent *event) override;
 
 private:
+    void setToolBarIcon(QToolButton* pButton, const QString& normalImag, const QString& selectImag);
+private:
     ClientModel *clientModel;
     WalletFrame *walletFrame;
 
@@ -93,21 +96,24 @@ private:
     QLabel *connectionsControl;
     QLabel *labelBlocksIcon;
     QLabel *progressBarLabel;
+    QLabel *m_pBarText;
     QProgressBar *progressBar;
     QProgressDialog *progressDialog;
 
     QMenuBar *appMenuBar;
-    QAction *overviewAction;
-    QAction *historyAction;
+
+    QToolButton *overviewAction;
+    QToolButton *historyAction;
+    QToolButton *sendCoinsAction;
+    QToolButton *receiveCoinsAction;
+
     QAction *quitAction;
-    QAction *sendCoinsAction;
     QAction *sendCoinsMenuAction;
     QAction *usedSendingAddressesAction;
     QAction *usedReceivingAddressesAction;
     QAction *signMessageAction;
     QAction *verifyMessageAction;
     QAction *aboutAction;
-    QAction *receiveCoinsAction;
     QAction *receiveCoinsMenuAction;
     QAction *optionsAction;
     QAction *toggleHideAction;

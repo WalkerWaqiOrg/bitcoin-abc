@@ -63,7 +63,7 @@ public:
             foreground = brush.color();
         }
 
-        painter->setPen(foreground);
+        painter->setPen(QColor(COLOR_NEGATIVE));
         QRect boundingRect;
         painter->drawText(addressRect, Qt::AlignLeft | Qt::AlignVCenter,
                           address, &boundingRect);
@@ -144,6 +144,12 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent)
             SLOT(handleOutOfSyncWarningClicks()));
     connect(ui->labelTransactionsStatus, SIGNAL(clicked()), this,
             SLOT(handleOutOfSyncWarningClicks()));
+
+    QPalette palette = ui->line->palette();
+    palette.setColor(QPalette::Dark, QColor(34, 40, 49));
+    palette.setColor(QPalette::Light, QColor(34, 40, 49));
+    palette.setColor(QPalette::Midlight, QColor(34, 40, 49));
+    ui->line->setPalette(palette);
 }
 
 void OverviewPage::handleTransactionClicked(const QModelIndex &index) {

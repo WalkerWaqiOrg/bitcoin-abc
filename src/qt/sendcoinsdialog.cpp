@@ -38,18 +38,6 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *_platformStyle,
       platformStyle(_platformStyle) {
     ui->setupUi(this);
 
-    if (!_platformStyle->getImagesOnButtons()) {
-        ui->addButton->setIcon(QIcon());
-        ui->clearButton->setIcon(QIcon());
-        ui->sendButton->setIcon(QIcon());
-    } else {
-        ui->addButton->setIcon(_platformStyle->SingleColorIcon(":/icons/add"));
-        ui->clearButton->setIcon(
-            _platformStyle->SingleColorIcon(":/icons/remove"));
-        ui->sendButton->setIcon(
-            _platformStyle->SingleColorIcon(":/icons/send"));
-    }
-
     GUIUtil::setupAddressWidget(ui->lineEditCoinControlChange, this);
 
     addEntry();

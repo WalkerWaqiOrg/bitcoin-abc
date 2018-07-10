@@ -1,4 +1,4 @@
-<!DOCTYPE RCC><RCC version="1.0">
+<RCC>
     <qresource prefix="/icons">
         <file alias="bitcoin">res/icons/bitcoin.png</file>
         <file alias="address-book">res/icons/address-book.png</file>
@@ -53,6 +53,10 @@
         <file alias="hd_enabled">res/icons/hd_enabled.png</file>
         <file alias="hd_disabled">res/icons/hd_disabled.png</file>
         <file alias="network_disabled">res/icons/network_disabled.png</file>
+        <file alias="overview_hover">res/icons/overview_hover.png</file>
+        <file alias="receive_hover">res/icons/receive_hover.png</file>
+        <file alias="send_hover">res/icons/send_hover.png</file>
+        <file alias="history_hover">res/icons/history_hover.png</file>
     </qresource>
     <qresource prefix="/movies">
         <file alias="spinner-000">res/movies/spinner-000.png</file>
@@ -91,5 +95,8 @@
         <file alias="spinner-033">res/movies/spinner-033.png</file>
         <file alias="spinner-034">res/movies/spinner-034.png</file>
         <file alias="spinner-035">res/movies/spinner-035.png</file>
+    </qresource>
+    <qresource prefix="/css">
+        <file>res/skin.css</file>
     </qresource>
 </RCC>
