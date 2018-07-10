@@ -185,6 +185,7 @@ public:
         // Note that of those with the service bits flag, most only support a
         // subset of possible options.
         // Bitcoin ABC seeder
+        /*
         vSeeds.push_back(
             CDNSSeedData("bitcoinabc.org", "seed.bitcoinabc.org", true));
         // bitcoinforks seeders
@@ -202,6 +203,7 @@ public:
         // criptolayer.net
         vSeeds.push_back(
             CDNSSeedData("criptolayer.net", "seeder.criptolayer.net", true));
+        */
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<uint8_t>(1, 0);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<uint8_t>(1, 5);
