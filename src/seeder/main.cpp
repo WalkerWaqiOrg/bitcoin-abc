@@ -473,7 +473,7 @@ extern "C" void *ThreadStats(void *) {
 }
 
 static const std::string mainnet_seeds[] = {
-    "114.115.209.211", "114.115.184.59",   ""};
+    "114.116.67.207", "114.116.90.222", ""};
 static const std::string testnet_seeds[] = {
     "testnet-seed.bitcoinabc.org",    "testnet-seed-abc.bitcoinforks.org",
     "testnet-seed.bitprim.org",       "testnet-seed.deadalnix.me",
