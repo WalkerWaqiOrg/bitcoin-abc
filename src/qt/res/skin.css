@@ -162,10 +162,14 @@ SendCoinsDialog QRadioButton#radioCustomPerKilobyte:disabled,#radioCustomAtLeast
 	color:#82858A;
 }
 
-SendCoinsDialog QLabel#labelFeeHeadline,
-SendCoinsDialog QLabel#labelFeeMinimized{
+SendCoinsDialog QLabel#labelFeeHeadline{
 	font-size:12px;
 	color:#82858A;
+}
+
+SendCoinsDialog QLabel#labelFeeMinimized{
+	font-size:12px;
+	color:#FFFFFF;
 }
 
 SendCoinsDialog QPushButton#buttonChooseFee,
@@ -244,3 +248,294 @@ SendCoinsDialog QPushButton#addButton:press{
 	border-radius:3px;
 }
 
+ReceiveCoinsDialog QLabel#label_5{
+	font-size:12px;
+	color:rgba(130,133,138,1);
+}
+
+ReceiveCoinsDialog QLabel#label,
+ReceiveCoinsDialog QLabel#label_2,
+ReceiveCoinsDialog QLabel#label_3{
+	font-size:12px;
+	color:rgba(209,209,209,1);
+}
+
+ReceiveCoinsDialog QCheckBox#reuseAddress{
+	font-size:12px;
+	color:rgba(130,133,138,1);
+}
+
+ReceiveCoinsDialog QLabel#label_6{
+	font-size:12px;
+	color:rgba(130,133,138,1);
+}
+
+ReceiveCoinsDialog QPushButton#receiveButton{
+	min-width:121px;
+	max-width:121px;
+	min-height:26px;
+	max-height:26px;
+	border: 1px solid #999999;
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,1), stop: 1 rgba(229,101,143,1));
+	font-size:12px;
+	color:#FFFFFF;
+	border-radius:3px;
+}
+
+ReceiveCoinsDialog QPushButton#receiveButton:hover{
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 rgba(229,101,143,0.5));
+}
+
+ReceiveCoinsDialog QPushButton#receiveButton:press{
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 rgba(229,101,143,0.5));
+}
+
+ReceiveCoinsDialog QPushButton#clearButton,
+ReceiveCoinsDialog QPushButton#showRequestButton,
+ReceiveCoinsDialog QPushButton#removeRequestButton
+{
+	min-width:57px;
+	max-width:57px;
+	min-height:26px;
+	max-height:26px;
+	border: 1px solid #82858A;
+	font-size:12px;
+	color:#82858A;
+	border-radius:3px;
+}
+
+ReceiveCoinsDialog QPushButton#clearButton:hover,
+ReceiveCoinsDialog QPushButton#showRequestButton:hover,
+ReceiveCoinsDialog QPushButton#removeRequestButton:hover{
+	color:#FFFFFF;
+	border: 1px solid #FFFFFF;
+}
+
+ReceiveCoinsDialog QPushButton#clearButton:press,
+ReceiveCoinsDialog QPushButton#showRequestButton:press,
+ReceiveCoinsDialog QPushButton#removeRequestButton:press{
+	color:#FFFFFF;
+	border: 1px solid #FFFFFF;
+	border-radius:3px;
+}
+
+ReceiveCoinsDialog QFrame#frame,
+ReceiveCoinsDialog QFrame#frame2,
+AddressBookPage QFrame#frame,
+AskPassphraseDialog QFrame#frame,
+OpenURIDialog QFrame#frame{
+	background-color:rgba(25,31,41,1);
+	border-radius:3px;
+}
+
+TransactionView{
+	background-color:rgba(25,31,41,1);
+	border-radius:3px;
+}
+
+WalletView QPushButton#exportButton{
+	min-width:64px;
+	max-width:64px;
+	min-height:26px;
+	max-height:26px;
+	border: 1px solid #999999;
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,1), stop: 1 rgba(229,101,143,1));
+	font-size:12px;
+	color:#FFFFFF;
+	border-radius:3px;
+}
+
+WalletView QPushButton#exportButton:hover{
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 rgba(229,101,143,0.5));
+}
+
+WalletView QPushButton#exportButton:press{
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 rgba(229,101,143,0.5));
+}
+
+AddressBookPage QPushButton#exportButton{
+	min-width:72px;
+	max-width:72px;
+	min-height:26px;
+	max-height:26px;
+	border: 1px solid #999999;
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,1), stop: 1 rgba(229,101,143,1));
+	font-size:12px;
+	color:#FFFFFF;
+	border-radius:3px;
+}
+
+AddressBookPage QPushButton#exportButton:hover{
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 rgba(229,101,143,0.5));
+}
+
+AddressBookPage QPushButton#exportButton:press{
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 rgba(229,101,143,0.5));
+}
+
+AddressBookPage QPushButton#newAddress,
+AddressBookPage QPushButton#copyAddress,
+AddressBookPage QPushButton#deleteAddress
+{
+	min-width:85px;
+	max-width:85px;
+	min-height:26px;
+	max-height:26px;
+	border: 1px solid #82858A;
+	font-size:12px;
+	color:#82858A;
+	border-radius:3px;
+}
+
+AddressBookPage QPushButton#newAddress:hover,
+AddressBookPage QPushButton#copyAddress:hover,
+AddressBookPage QPushButton#deleteAddress:hover{
+	color:#FFFFFF;
+	border: 1px solid #FFFFFF;
+}
+
+AddressBookPage QPushButton#newAddress:press,
+AddressBookPage QPushButton#copyAddress:press,
+AddressBookPage QPushButton#deleteAddress:press{
+	color:#FFFFFF;
+	border: 1px solid #FFFFFF;
+	border-radius:3px;
+}
+
+AddressBookPage QPushButton#closeButton{
+	min-width:72px;
+	max-width:72px;
+	min-height:26px;
+	max-height:26px;
+	border: 1px solid #82858A;
+	font-size:12px;
+	color:#82858A;
+	border-radius:3px;
+}
+
+AddressBookPage QPushButton#closeButton:hover{
+	color:#FFFFFF;
+	border: 1px solid #FFFFFF;
+}
+
+AddressBookPage QPushButton#closeButton:press{
+	color:#FFFFFF;
+	border: 1px solid #FFFFFF;
+	border-radius:3px;
+}
+
+AddressBookPage QLabel#labelExplanation{
+	font-size:12px;
+	color:rgba(130,133,138,1);
+}
+
+AskPassphraseDialog QLabel#warningLabel{
+	font-size:12px;
+	color:rgba(130,133,138,1);
+}
+
+AskPassphraseDialog QLabel#passLabel1,
+AskPassphraseDialog QLabel#passLabel2,
+AskPassphraseDialog QLabel#passLabel3{
+	font-size:12px;
+	color:rgba(209,209,209,1);
+}
+
+OpenURIDialog QLabel#label_2{
+	font-size:12px;
+	color:rgba(130,133,138,1);
+}
+
+OpenURIDialog QLabel#label{
+	font-size:12px;
+	color:rgba(209,209,209,1);
+}
+
+OpenURIDialog QPushButton#selectFileButton{
+	min-width:70px;
+	max-width:70px;
+	min-height:26px;
+	max-height:26px;
+	border: 1px solid #82858A;
+	font-size:12px;
+	color:#82858A;
+	border-radius:3px;
+}
+
+OpenURIDialog QPushButton#selectFileButton:hover{
+	color:#FFFFFF;
+	border: 1px solid #FFFFFF;
+}
+
+OpenURIDialog QPushButton#selectFileButton:press{
+	color:#FFFFFF;
+	border: 1px solid #FFFFFF;
+	border-radius:3px;
+}
+
+OpenURIDialog QPushButton#pushButton{
+	min-width:85px;
+	max-width:85px;
+	min-height:26px;
+	max-height:26px;
+	border: 1px solid #82858A;
+	font-size:12px;
+	color:#82858A;
+	border-radius:3px;
+}
+
+OpenURIDialog QPushButton#pushButton:hover{
+	color:#FFFFFF;
+	border: 1px solid #FFFFFF;
+}
+
+OpenURIDialog QPushButton#pushButton:press{
+	color:#FFFFFF;
+	border: 1px solid #FFFFFF;
+	border-radius:3px;
+}
+
+OpenURIDialog QPushButton#pushButton_2{
+	min-width:72px;
+	max-width:72px;
+	min-height:26px;
+	max-height:26px;
+	border: 1px solid #999999;
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,1), stop: 1 rgba(229,101,143,1));
+	font-size:12px;
+	color:#FFFFFF;
+	border-radius:3px;
+}
+
+OpenURIDialog QPushButton#pushButton_2:hover{
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 rgba(229,101,143,0.5));
+}
+
+OpenURIDialog QPushButton#pushButton_2:press{
+	background-color: QLinearGradient(x1: 0, y1: 0,
+	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 rgba(229,101,143,0.5));
+}
+
+SignVerifyMessageDialog QLabel#infoLabel_SM,
+SignVerifyMessageDialog QLabel#infoLabel_VM{
+	font-size:12px;
+	color:rgba(209,209,209,1);
+}
+
+
+SignVerifyMessageDialog QWidget#tabSignMessage,
+SignVerifyMessageDialog QWidget#tabVerifyMessage{
+	background-color:rgba(25,31,41,1);
+	border-radius:3px;
+}
