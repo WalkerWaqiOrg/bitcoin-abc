@@ -28,22 +28,6 @@ ReceiveCoinsDialog::ReceiveCoinsDialog(const PlatformStyle *_platformStyle,
       model(0), platformStyle(_platformStyle), cfg(cfg) {
     ui->setupUi(this);
 
-    if (!_platformStyle->getImagesOnButtons()) {
-        ui->clearButton->setIcon(QIcon());
-        ui->receiveButton->setIcon(QIcon());
-        ui->showRequestButton->setIcon(QIcon());
-        ui->removeRequestButton->setIcon(QIcon());
-    } else {
-        ui->clearButton->setIcon(
-            _platformStyle->SingleColorIcon(":/icons/remove"));
-        ui->receiveButton->setIcon(
-            _platformStyle->SingleColorIcon(":/icons/receiving_addresses"));
-        ui->showRequestButton->setIcon(
-            _platformStyle->SingleColorIcon(":/icons/edit"));
-        ui->removeRequestButton->setIcon(
-            _platformStyle->SingleColorIcon(":/icons/remove"));
-    }
-
     // context menu actions
     QAction *copyURIAction = new QAction(tr("Copy URI"), this);
     QAction *copyLabelAction = new QAction(tr("Copy label"), this);

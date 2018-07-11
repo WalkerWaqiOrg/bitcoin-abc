@@ -201,6 +201,10 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle,
             SLOT(copyTxPlainText()));
     connect(editLabelAction, SIGNAL(triggered()), this, SLOT(editLabel()));
     connect(showDetailsAction, SIGNAL(triggered()), this, SLOT(showDetails()));
+
+    setStyleSheet("TransactionView{"
+                   "background-color:rgba(25,31,41,1);"
+                  "border-radius:3px;}");
 }
 
 void TransactionView::setModel(WalletModel *_model) {
