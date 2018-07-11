@@ -2067,44 +2067,56 @@ bool CConnman::OpenNetworkConnection(const CAddress &addrConnect,
     //
     // Initiate outbound network connection
     //
+    printf("OpenNetworkConnection1111111111111\n");
     if (interruptNet) {
+        printf("OpenNetworkConnection222222222222\n");
         return false;
     }
     if (!fNetworkActive) {
+        printf("OpenNetworkConnection333333333333\n");
         return false;
     }
     if (!pszDest) {
+        printf("OpenNetworkConnection44444444444\n");
         if (IsLocal(addrConnect) || FindNode((CNetAddr)addrConnect) ||
             IsBanned(addrConnect) || FindNode(addrConnect.ToStringIPPort())) {
+            printf("OpenNetworkConnection5555555555\n");
             return false;
         }
     } else if (FindNode(std::string(pszDest))) {
+        printf("OpenNetworkConnection666666666\n");
         return false;
     }
 
     CNode *pnode = ConnectNode(addrConnect, pszDest, fCountFailure);
-
+    printf("OpenNetworkConnection777777777\n");
     if (!pnode) {
+        printf("OpenNetworkConnection8888888888\n");
         return false;
     }
     if (grantOutbound) {
+        printf("OpenNetworkConnection99999999999\n");
         grantOutbound->MoveTo(pnode->grantOutbound);
     }
     if (fOneShot) {
+        printf("OpenNetworkConnectionaaaaaaaaa\n");
         pnode->fOneShot = true;
     }
     if (fFeeler) {
+        printf("OpenNetworkConnectionbbbbbbbbb\n");
         pnode->fFeeler = true;
     }
     if (fAddnode) {
+        printf("OpenNetworkConnectioncccccccccc\n");
         pnode->fAddnode = true;
     }
 
     GetNodeSignals().InitializeNode(*config, pnode, *this);
+    printf("OpenNetworkConnectionddddddddd\n");
     {
         LOCK(cs_vNodes);
-        printf("InitializeNode######add#########111111111111111\n");
-        printf("InitializeNode######ip is %s\n",pnode->GetAddrName().c_str());
+        printf("OpenNetworkConnection######add#########eeeeeeeeeee\n");
+        printf("OpenNetworkConnection######ip is %s\n",pnode->GetAddrName().c_str());
         vNodes.push_back(pnode);
     }
 
