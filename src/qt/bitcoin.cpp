@@ -783,7 +783,7 @@ int main(int argc, char *argv[]) {
         !gArgs.GetBoolArg("-min", false))
         app.createSplashScreen(networkStyle.data());
 	//10. Load the styleSheet
-    QFile file(":res/skin.css");
+    QFile file(":/css/res/skin.css");
     if (!file.open(QIODevice::ReadOnly)) {
         Q_ASSERT(false);
     }
