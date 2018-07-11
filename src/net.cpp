@@ -1120,45 +1120,57 @@ bool CConnman::AttemptToEvictConnection() {
 void CConnman::AcceptConnection(const ListenSocket &hListenSocket) {
     struct sockaddr_storage sockaddr;
     socklen_t len = sizeof(sockaddr);
+    printf("AcceptConnection111111111\n");
     SOCKET hSocket =
         accept(hListenSocket.socket, (struct sockaddr *)&sockaddr, &len);
     CAddress addr;
     int nInbound = 0;
     int nMaxInbound = nMaxConnections - (nMaxOutbound + nMaxFeeler);
-
+    printf("AcceptConnection222222222\n");
     if (hSocket != INVALID_SOCKET) {
+        printf("AcceptConnection3333333333\n");
         if (!addr.SetSockAddr((const struct sockaddr *)&sockaddr)) {
+            printf("AcceptConnection444444444\n");
             LogPrintf("Warning: Unknown socket family\n");
         }
     }
-
+    printf("AcceptConnection555555555\n");
     bool whitelisted = hListenSocket.whitelisted || IsWhitelistedRange(addr);
     {
+        printf("AcceptConnection6666666666\n");
         LOCK(cs_vNodes);
         for (CNode *pnode : vNodes) {
+            printf("AcceptConnection777777777\n");
             if (pnode->fInbound) {
+                printf("AcceptConnection888888888\n");
                 nInbound++;
             }
         }
     }
-
+    printf("AcceptConnection999999999\n");
     if (hSocket == INVALID_SOCKET) {
         int nErr = WSAGetLastError();
+        printf("AcceptConnectionaaaaaaaa\n");
         if (nErr != WSAEWOULDBLOCK) {
+            printf("AcceptConnectionbbbbbbbbbb\n");
             LogPrintf("socket error accept failed: %s\n",
                       NetworkErrorString(nErr));
         }
+        printf("AcceptConnectionccccccccccc\n");
         return;
     }
-
+    printf("AcceptConnectiondddddddd\n");
     if (!fNetworkActive) {
+        printf("AcceptConnectioneeeeeeeeee\n");
         LogPrintf("connection from %s dropped: not accepting new connections\n",
                   addr.ToString());
         CloseSocket(hSocket);
         return;
     }
 
+    printf("AcceptConnectionfffffffff\n");
     if (!IsSelectableSocket(hSocket)) {
+        printf("AcceptConnectionggggggggg\n");
         LogPrintf("connection from %s dropped: non-selectable socket\n",
                   addr.ToString());
         CloseSocket(hSocket);
@@ -1174,15 +1186,17 @@ void CConnman::AcceptConnection(const ListenSocket &hListenSocket) {
 #else
     setsockopt(hSocket, IPPROTO_TCP, TCP_NODELAY, (void *)&set, sizeof(int));
 #endif
-
+    printf("AcceptConnectionhhhhhhhhhhh\n");
     if (IsBanned(addr) && !whitelisted) {
         LogPrintf("connection from %s dropped (banned)\n", addr.ToString());
         CloseSocket(hSocket);
         return;
     }
-
+    printf("AcceptConnectioniiiiiiiiii\n");
     if (nInbound >= nMaxInbound) {
+        printf("AcceptConnectionjjjjjjjjjjj\n");
         if (!AttemptToEvictConnection()) {
+            printf("AcceptConnectionkkkkkkkkkkk\n");
             // No connection to evict, disconnect the new connection
             LogPrint(BCLog::NET, "failed to find an eviction candidate - "
                                  "connection dropped (full)\n");
@@ -1191,11 +1205,12 @@ void CConnman::AcceptConnection(const ListenSocket &hListenSocket) {
         }
     }
 
+    printf("AcceptConnectionlllllllllllll\n");
     NodeId id = GetNewNodeId();
     uint64_t nonce = GetDeterministicRandomizer(RANDOMIZER_ID_LOCALHOSTNONCE)
                          .Write(id)
                          .Finalize();
-
+    printf("AcceptConnectionmmmmmmmmmmmmm\n");
     CNode *pnode = new CNode(id, nLocalServices, GetBestHeight(), hSocket, addr,
                              CalculateKeyedNetGroup(addr), nonce, "", true);
     pnode->AddRef();
@@ -1206,8 +1221,11 @@ void CConnman::AcceptConnection(const ListenSocket &hListenSocket) {
     LogPrint(BCLog::NET, "connection from %s accepted\n", addr.ToString());
 
     {
+        printf("AcceptConnectio  #######add#######nnnnnnnnnnnnn\n");
         LOCK(cs_vNodes);
         vNodes.push_back(pnode);
+        printf("AcceptConnectio######ip is %s\n",pnode->GetAddrName().c_str());
+        printf("AcceptConnectionooooooooooooo\n");
     }
 }
 
@@ -1224,6 +1242,7 @@ void CConnman::ThreadSocketHandler() {
             for (CNode *pnode : vNodesCopy) {
                 if (pnode->fDisconnect) {
                     // remove from vNodes
+                    printf("ThreadSocketHandler  #######delete#######nnnnnnnnnnnnn\n");
                     vNodes.erase(remove(vNodes.begin(), vNodes.end(), pnode),
                                  vNodes.end());
 
@@ -2084,6 +2103,8 @@ bool CConnman::OpenNetworkConnection(const CAddress &addrConnect,
     GetNodeSignals().InitializeNode(*config, pnode, *this);
     {
         LOCK(cs_vNodes);
+        printf("InitializeNode######add#########111111111111111\n");
+        printf("InitializeNode######ip is %s\n",pnode->GetAddrName().c_str());
         vNodes.push_back(pnode);
     }
 
@@ -2564,6 +2585,7 @@ void CConnman::Stop() {
     for (CNode *pnode : vNodesDisconnected) {
         DeleteNode(pnode);
     }
+    printf("Stop  #######clear#######nnnnnnnnnnnnn\n");
     vNodes.clear();
     vNodesDisconnected.clear();
     vhListenSocket.clear();
