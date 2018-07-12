@@ -124,23 +124,26 @@ void ReceiveRequestDialog::update() {
     QString uri = GUIUtil::formatBitcoinURI(*config, info);
     ui->btnSaveAs->setEnabled(false);
     QString html;
-    html += "<html><font face='verdana, arial, helvetica, sans-serif'>";
-    html += "<b>" + tr("Payment information") + "</b><br>";
-    html += "<b>" + tr("URI") + "</b>: ";
-    html += "<a href=\"" + uri + "\">" + GUIUtil::HtmlEscape(uri) + "</a><br>";
-    html += "<b>" + tr("Address") +
-            "</b>: " + GUIUtil::HtmlEscape(info.address) + "<br>";
+    html += "<html><head/><body><p><span style=\" font-family:'verdana, arial, helvetica, sans-serif'; font-size:14px; color:#82858a;\">";
+    html += tr("Payment information") + "</span></p>";
+    html += "<p><span style=\" font-family:'verdana, arial, helvetica, sans-serif'; font-size:14px; color:#82858a;\">";
+    html += tr("URI") + ": ";
+    html += "<a href=\"" + uri + "\">" + "<span style=\" font-size:12px; text-decoration: underline; color:#86b9ff;\">"
+        + GUIUtil::HtmlEscape(uri) + "</span></a></p>";
+    html += "<p><span style=\" font-family:'verdana, arial, helvetica, sans-serif'; font-size:14px; color:#82858a;\">" + tr("Address") +
+            ": " + GUIUtil::HtmlEscape(info.address) + "</span></p>";
     if (info.amount != Amount(0))
-        html += "<b>" + tr("Amount") +
-                "</b>: " + BitcoinUnits::formatHtmlWithUnit(
+        html += "<p><span style=\" font-family:'verdana, arial, helvetica, sans-serif'; font-size:14px; color:#82858a;\">" + tr("Amount") +
+                ": " + BitcoinUnits::formatHtmlWithUnit(
                                model->getDisplayUnit(), info.amount) +
-                "<br>";
+                "</span></p>";
     if (!info.label.isEmpty())
-        html += "<b>" + tr("Label") +
-                "</b>: " + GUIUtil::HtmlEscape(info.label) + "<br>";
+        html += "<p><span style=\" font-family:'verdana, arial, helvetica, sans-serif'; font-size:14px; color:#82858a;\">" + tr("Label") +
+                ": " + GUIUtil::HtmlEscape(info.label) + "</span></p>";
     if (!info.message.isEmpty())
-        html += "<b>" + tr("Message") +
-                "</b>: " + GUIUtil::HtmlEscape(info.message) + "<br>";
+        html += "<p><span style=\" font-family:'verdana, arial, helvetica, sans-serif'; font-size:14px; color:#82858a;\">" + tr("Message") +
+                ": " + GUIUtil::HtmlEscape(info.message) + "</span></p>";
+    html += "</body></html>";
     ui->outUri->setText(html);
 
 #ifdef USE_QRCODE
@@ -199,4 +202,8 @@ void ReceiveRequestDialog::on_btnCopyURI_clicked() {
 
 void ReceiveRequestDialog::on_btnCopyAddress_clicked() {
     GUIUtil::setClipboard(info.address);
+}
+
+void ReceiveRequestDialog::on_buttonBox_clicked() {
+    this->reject();
 }
