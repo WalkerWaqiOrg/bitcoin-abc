@@ -1674,51 +1674,65 @@ static bool ProcessMessage(const Config &config, CNode *pfrom,
     else if (strCommand == NetMsgType::ADDR) {
         std::vector<CAddress> vAddr;
         vRecv >> vAddr;
+        printf("process message ##addr#####11111111111\n");
 
         // Don't want addr from older versions unless seeding
         if (pfrom->nVersion < CADDR_TIME_VERSION &&
             connman.GetAddressCount() > 1000) {
+            printf("process message ##addr#####22222222\n");
             return true;
         }
         if (vAddr.size() > 1000) {
             LOCK(cs_main);
+            printf("process message ##addr#####333333333\n");
             Misbehaving(pfrom, 20, "oversized-addr");
             return error("message addr size() = %u", vAddr.size());
         }
 
         // Store the new addresses
+        printf("process message ##addr#####44444444\n");
         std::vector<CAddress> vAddrOk;
         int64_t nNow = GetAdjustedTime();
         int64_t nSince = nNow - 10 * 60;
         for (CAddress &addr : vAddr) {
+            printf("process message ##addr##### ip is %s\n",addr.ToString().c_str());
             if (interruptMsgProc) {
+                printf("process message ##addr#####55555555\n");
                 return true;
             }
 
             if ((addr.nServices & REQUIRED_SERVICES) != REQUIRED_SERVICES) {
+                printf("process message ##addr#####6666666\n");
                 continue;
             }
 
             if (addr.nTime <= 100000000 || addr.nTime > nNow + 10 * 60) {
+                printf("process message ##addr#####777777\n");
                 addr.nTime = nNow - 5 * 24 * 60 * 60;
             }
+            printf("process message ##addr#####88888\n");
             pfrom->AddAddressKnown(addr);
             bool fReachable = IsReachable(addr);
             if (addr.nTime > nSince && !pfrom->fGetAddr && vAddr.size() <= 10 &&
                 addr.IsRoutable()) {
+                printf("process message ##addr#####99999\n");
                 // Relay to a limited number of other nodes
                 RelayAddress(addr, fReachable, connman);
             }
             // Do not store addresses outside our network
             if (fReachable) {
+                printf("process message ##addr#####aaaaaaa\n");
                 vAddrOk.push_back(addr);
             }
         }
+        printf("process message ##addr#####bbbbbbb\n");
         connman.AddNewAddresses(vAddrOk, pfrom->addr, 2 * 60 * 60);
         if (vAddr.size() < 1000) {
+            printf("process message ##addr#####ccccccc\n");
             pfrom->fGetAddr = false;
         }
         if (pfrom->fOneShot) {
+            printf("process message ##addr#####dddddddd\n");
             pfrom->fDisconnect = true;
         }
     }

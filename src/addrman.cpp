@@ -185,9 +185,10 @@ void CAddrMan::MakeTried(CAddrInfo &info, int nId) {
         infoOld.nRefCount = 1;
         vvNew[nUBucket][nUBucketPos] = nIdEvict;
         nNew++;
+        printf("MakeTried######addnew##########\n");
     }
     assert(vvTried[nKBucket][nKBucketPos] == -1);
-
+    printf("MakeTried######addvvTried##########\n");
     vvTried[nKBucket][nKBucketPos] = nId;
     nTried++;
     info.fInTried = true;
@@ -306,6 +307,7 @@ bool CAddrMan::Add_(const CAddress &addr, const CNetAddr &source,
             ClearNew(nUBucket, nUBucketPos);
             pinfo->nRefCount++;
             vvNew[nUBucket][nUBucketPos] = nId;
+            printf("Add####addnew############\n");
         } else {
             if (pinfo->nRefCount == 0) {
                 Delete(nId);
@@ -340,14 +342,16 @@ CAddrInfo CAddrMan::Select_(bool newOnly) {
     if (size() == 0) return CAddrInfo();
 
     if (newOnly && nNew == 0) return CAddrInfo();
-
+    printf("Select_11111111111111\n");
     // Use a 50% chance for choosing between tried and new table entries.
     if (!newOnly && (nTried > 0 && (nNew == 0 || RandomInt(2) == 0))) {
         // use a tried node
         double fChanceFactor = 1.0;
+        printf("Select_2222222222222\n");
         while (1) {
             int nKBucket = RandomInt(ADDRMAN_TRIED_BUCKET_COUNT);
             int nKBucketPos = RandomInt(ADDRMAN_BUCKET_SIZE);
+            printf("Select_333333333333\n");
             while (vvTried[nKBucket][nKBucketPos] == -1) {
                 nKBucket =
                     (nKBucket +
@@ -358,11 +362,13 @@ CAddrInfo CAddrMan::Select_(bool newOnly) {
                      insecure_rand.randbits(ADDRMAN_BUCKET_SIZE_LOG2)) %
                     ADDRMAN_BUCKET_SIZE;
             }
+            printf("Select_444444444444\n");
             int nId = vvTried[nKBucket][nKBucketPos];
             assert(mapInfo.count(nId) == 1);
             CAddrInfo &info = mapInfo[nId];
             if (RandomInt(1 << 30) <
                 fChanceFactor * info.GetChance() * (1 << 30)) {
+                printf("Select_5555555555555\n");
                 return info;
             }
             fChanceFactor *= 1.2;
@@ -370,6 +376,7 @@ CAddrInfo CAddrMan::Select_(bool newOnly) {
     } else {
         // use a new node
         double fChanceFactor = 1.0;
+        printf("Select_66666666666\n");
         while (1) {
             int nUBucket = RandomInt(ADDRMAN_NEW_BUCKET_COUNT);
             int nUBucketPos = RandomInt(ADDRMAN_BUCKET_SIZE);
@@ -383,6 +390,7 @@ CAddrInfo CAddrMan::Select_(bool newOnly) {
                      insecure_rand.randbits(ADDRMAN_BUCKET_SIZE_LOG2)) %
                     ADDRMAN_BUCKET_SIZE;
             }
+            printf("Select_777777777777\n");
             int nId = vvNew[nUBucket][nUBucketPos];
             assert(mapInfo.count(nId) == 1);
             CAddrInfo &info = mapInfo[nId];
@@ -390,6 +398,7 @@ CAddrInfo CAddrMan::Select_(bool newOnly) {
                 fChanceFactor * info.GetChance() * (1 << 30))
                 return info;
             fChanceFactor *= 1.2;
+            printf("Select_8888888888\n");
         }
     }
 }

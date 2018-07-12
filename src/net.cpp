@@ -1769,6 +1769,7 @@ void CConnman::ProcessOneShot() {
     CAddress addr;
     CSemaphoreGrant grant(*semOutbound, true);
     if (grant) {
+        printf("ProcessOneShot1111111111\n");
         if (!OpenNetworkConnection(addr, false, &grant, strDest.c_str(),
                                    true)) {
             AddOneShot(strDest);
@@ -1783,6 +1784,7 @@ void CConnman::ThreadOpenConnections() {
             ProcessOneShot();
             for (const std::string &strAddr : gArgs.GetArgs("-connect")) {
                 CAddress addr(CService(), NODE_NONE);
+                printf("ThreadOpenConnections11111111111\n");
                 OpenNetworkConnection(addr, false, nullptr, strAddr.c_str());
                 for (int i = 0; i < 10 && i < nLoop; i++) {
                     if (!interruptNet.sleep_for(
@@ -1796,7 +1798,7 @@ void CConnman::ThreadOpenConnections() {
             }
         }
     }
-
+    printf("ThreadOpenConnections2222222222222222\n");
     // Initiate network connections
     int64_t nStart = GetTime();
 
@@ -1805,20 +1807,22 @@ void CConnman::ThreadOpenConnections() {
         PoissonNextSend(nStart * 1000 * 1000, FEELER_INTERVAL);
     while (!interruptNet) {
         ProcessOneShot();
-
+        printf("ThreadOpenConnections33333333333333333\n");
         if (!interruptNet.sleep_for(std::chrono::milliseconds(500))) {
             return;
         }
-
+        printf("ThreadOpenConnections444444444444444\n");
         CSemaphoreGrant grant(*semOutbound);
         if (interruptNet) {
             return;
         }
-
+        printf("ThreadOpenConnections55555555555555\n");
         // Add seed nodes if DNS seeds are all down (an infrastructure attack?).
         if (addrman.size() == 0 && (GetTime() - nStart > 60)) {
             static bool done = false;
+            printf("ThreadOpenConnections66666666666\n");
             if (!done) {
+                printf("ThreadOpenConnections\n");
                 LogPrintf("Adding fixed seed nodes as DNS doesn't seem to be "
                           "available.\n");
                 CNetAddr local;
@@ -1838,11 +1842,13 @@ void CConnman::ThreadOpenConnections() {
         // this here so we don't have to critsect vNodes inside mapAddresses
         // critsect.
         int nOutbound = 0;
+        printf("ThreadOpenConnections7777777777777\n");
         std::set<std::vector<uint8_t>> setConnected;
         {
             LOCK(cs_vNodes);
             for (CNode *pnode : vNodes) {
                 if (!pnode->fInbound && !pnode->fAddnode) {
+                    printf("ThreadOpenConnections888888888888\n");
                     // Netgroups for inbound and addnode peers are not excluded
                     // because our goal here is to not use multiple of our
                     // limited outbound slots on a single netgroup but inbound
@@ -1869,13 +1875,16 @@ void CConnman::ThreadOpenConnections() {
         //  * Only make a feeler connection once every few minutes.
         //
         bool fFeeler = false;
+        printf("ThreadOpenConnections999999999999999\n");
         if (nOutbound >= nMaxOutbound) {
             // The current time right now (in microseconds).
             int64_t nTime = GetTimeMicros();
             if (nTime > nNextFeeler) {
+                printf("ThreadOpenConnectionsaaaaaaaaaaaa\n");
                 nNextFeeler = PoissonNextSend(nTime, FEELER_INTERVAL);
                 fFeeler = true;
             } else {
+                printf("ThreadOpenConnectionsbbbbbbbbbbbbbb\n");
                 continue;
             }
         }
@@ -1883,11 +1892,13 @@ void CConnman::ThreadOpenConnections() {
         int64_t nANow = GetAdjustedTime();
         int nTries = 0;
         while (!interruptNet) {
+            printf("ThreadOpenConnectionscccccccccccccc\n");
             CAddrInfo addr = addrman.Select(fFeeler);
 
             // if we selected an invalid address, restart
             if (!addr.IsValid() || setConnected.count(addr.GetGroup()) ||
                 IsLocal(addr)) {
+                    printf("ThreadOpenConnectionsdddddddddddd\n");
                 break;
             }
 
@@ -1898,20 +1909,24 @@ void CConnman::ThreadOpenConnections() {
             // addresses.
             nTries++;
             if (nTries > 100) {
+                printf("ThreadOpenConnectionseeeeeeeeeeee\n");
                 break;
             }
 
             if (IsLimited(addr)) {
+                printf("ThreadOpenConnectionsffffffffffff\n");
                 continue;
             }
 
             // only connect to full nodes
             if ((addr.nServices & REQUIRED_SERVICES) != REQUIRED_SERVICES) {
+                printf("ThreadOpenConnectionsgggggggggggggg\n");
                 continue;
             }
 
             // only consider very recently tried nodes after 30 failed attempts
             if (nANow - addr.nLastTry < 600 && nTries < 30) {
+                printf("ThreadOpenConnectionshhhhhhhhhhhhhhh\n");
                 continue;
             }
 
@@ -1919,6 +1934,7 @@ void CConnman::ThreadOpenConnections() {
             // attempts and only if less than half the outbound are up.
             if ((addr.nServices & nRelevantServices) != nRelevantServices &&
                 (nTries < 40 || nOutbound >= (nMaxOutbound >> 1))) {
+                printf("ThreadOpenConnectionsiiiiiiiiiiiiiiiii\n");
                 continue;
             }
 
@@ -1926,16 +1942,20 @@ void CConnman::ThreadOpenConnections() {
             // selected already.
             if (addr.GetPort() != config->GetChainParams().GetDefaultPort() &&
                 nTries < 50) {
+                printf("ThreadOpenConnectionsjjjjjjjjjjjjjjj\n");
                 continue;
             }
 
             addrConnect = addr;
+            printf("ThreadOpenConnectionskkkkkkkkkkkkkkkk\n");
             break;
         }
 
         if (addrConnect.IsValid()) {
+            printf("ThreadOpenConnectionsllllllllll\n");
 
             if (fFeeler) {
+                printf("ThreadOpenConnectionsmmmmmmmmmmmmm\n");
                 // Add small amount of random noise before connection to avoid
                 // synchronization.
                 int randsleep = GetRandInt(FEELER_SLEEP_WINDOW * 1000);
@@ -1946,7 +1966,7 @@ void CConnman::ThreadOpenConnections() {
                 LogPrint(BCLog::NET, "Making feeler connection to %s\n",
                          addrConnect.ToString());
             }
-
+            printf("ThreadOpenConnections##############\n");
             OpenNetworkConnection(addrConnect,
                                   (int)setConnected.size() >=
                                       std::min(nMaxConnections - 1, 2),
@@ -2042,6 +2062,7 @@ void CConnman::ThreadOpenAddedConnections() {
                 CService service(
                     LookupNumeric(info.strAddedNode.c_str(),
                                   config->GetChainParams().GetDefaultPort()));
+                printf("ThreadOpenAddedConnections##############\n");
                 OpenNetworkConnection(CAddress(service, NODE_NONE), false,
                                       &grant, info.strAddedNode.c_str(), false,
                                       false, true);
@@ -2067,6 +2088,7 @@ bool CConnman::OpenNetworkConnection(const CAddress &addrConnect,
     //
     // Initiate outbound network connection
     //
+    printf("OpenNetworkConnection00000000000######ip is %s\n",addrConnect.ToString().c_str());
     printf("OpenNetworkConnection1111111111111\n");
     if (interruptNet) {
         printf("OpenNetworkConnection222222222222\n");
