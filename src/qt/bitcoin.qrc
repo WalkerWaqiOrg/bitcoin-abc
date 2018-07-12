@@ -99,4 +99,12 @@
     <qresource prefix="/css">
         <file>res/skin.css</file>
     </qresource>
+    <qresource prefix="/picture">
+        <file alias="checkbox_check">res/icons/checkbox_check.png</file>
+        <file alias="checkbox_uncheck">res/icons/checkbox_uncheck.png</file>
+        <file alias="down">res/icons/down.png</file>
+        <file alias="down_hover">res/icons/down_hover.png</file>
+        <file alias="top">res/icons/top.png</file>
+        <file alias="top_hover">res/icons/top_hover.png</file>
+    </qresource>
 </RCC>
