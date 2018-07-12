@@ -28,6 +28,7 @@
 #include <QProgressDialog>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include "stylesheet.h"
 
 WalletView::WalletView(const PlatformStyle *_platformStyle, const Config *cfg,
                        QWidget *parent)
@@ -44,27 +45,7 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, const Config *cfg,
     QPushButton *exportButton = new QPushButton(tr("&Export"), this);
     exportButton->setToolTip(
         tr("Export the data in the current tab to a file"));
-    exportButton->setStyleSheet(
-        "QPushButton{"
-        "	min-width:64px;"
-        "	max-width:64px;"
-        "	min-height:26px;"
-        "	max-height:26px;"
-        "	border: 1px solid #999999;"
-        "	background-color: QLinearGradient(x1: 0, y1: 0,"
-        "	x2: 1, y2: 0, stop: 0 rgba(252,172,141,1), stop: 1 "
-        "rgba(229,101,143,1));"
-        "	font-size:12px;"
-        "	color:#FFFFFF;"
-        "	border-radius:3px;}"
-        "QPushButton:hover{"
-        "	background-color: QLinearGradient(x1: 0, y1: 0,"
-        "	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 "
-        "rgba(229,101,143,0.5));}"
-        "QPushButton:press{"
-        "	background-color: QLinearGradient(x1: 0, y1: 0,"
-        "	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 "
-        "rgba(229,101,143,0.5));}");
+    exportButton->setStyleSheet(styleBtnRed.arg(64, 26));
     hbox_buttons->addStretch();
     hbox_buttons->addWidget(exportButton);
     vbox->addLayout(hbox_buttons);

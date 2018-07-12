@@ -145,11 +145,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent)
     connect(ui->labelTransactionsStatus, SIGNAL(clicked()), this,
             SLOT(handleOutOfSyncWarningClicks()));
 
-    QPalette palette = ui->line->palette();
-    palette.setColor(QPalette::Dark, QColor(34, 40, 49));
-    palette.setColor(QPalette::Light, QColor(34, 40, 49));
-    palette.setColor(QPalette::Midlight, QColor(34, 40, 49));
-    ui->line->setPalette(palette);
+    ui->line->setStyleSheet(" QFrame{background-color:#222831; }");
 }
 
 void OverviewPage::handleTransactionClicked(const QModelIndex &index) {

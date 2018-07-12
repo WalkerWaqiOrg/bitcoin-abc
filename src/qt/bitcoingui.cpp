@@ -213,7 +213,7 @@ BitcoinGUI::BitcoinGUI(const Config *cfg, const PlatformStyle *_platformStyle,
     m_pBarText->setText(progressBar->text());
     m_pBarText->setVisible(false);
 
-    statusBar()->setStyleSheet("QStatusBar::item{border: 0px;}");
+    statusBar()->setStyleSheet("QStatusBar{background-color:rgba(14,19,26,1);} QStatusBar::item{border: 0px;}");
     statusBar()->addWidget(progressBarLabel);
     statusBar()->addWidget(progressBar);
     statusBar()->addWidget(m_pBarText);
@@ -546,6 +546,7 @@ void BitcoinGUI::createMenuBar() {
 void BitcoinGUI::createToolBars() {
     if (walletFrame) {
         QToolBar *toolbar = addToolBar(tr("Tabs toolbar"));
+        toolbar->setStyleSheet("QToolBar{background-color:rgba(14,19,26,1);border:none;}");
         toolbar->setMovable(false);
         toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
         toolbar->addWidget(overviewAction);
