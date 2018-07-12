@@ -92,6 +92,7 @@ CAddrInfo *CAddrMan::Find(const CNetAddr &addr, int *pnId) {
 CAddrInfo *CAddrMan::Create(const CAddress &addr, const CNetAddr &addrSource,
                             int *pnId) {
     int nId = nIdCount++;
+    printf("create addrinfo ###### ip is %s#####\n",addr.ToString().c_str());
     mapInfo[nId] = CAddrInfo(addr, addrSource);
     mapAddr[addr] = nId;
     mapInfo[nId].nRandomPos = vRandom.size();
@@ -120,12 +121,14 @@ void CAddrMan::SwapRandom(unsigned int nRndPos1, unsigned int nRndPos2) {
 
 void CAddrMan::Delete(int nId) {
     assert(mapInfo.count(nId) != 0);
+    
     CAddrInfo &info = mapInfo[nId];
     assert(!info.fInTried);
     assert(info.nRefCount == 0);
 
     SwapRandom(info.nRandomPos, vRandom.size() - 1);
     vRandom.pop_back();
+    printf("delete addrinfo ###### ip is %s#####\n",info.ToString().c_str());
     mapAddr.erase(info);
     mapInfo.erase(nId);
     nNew--;
@@ -140,6 +143,7 @@ void CAddrMan::ClearNew(int nUBucket, int nUBucketPos) {
         infoDelete.nRefCount--;
         vvNew[nUBucket][nUBucketPos] = -1;
         if (infoDelete.nRefCount == 0) {
+            printf("ClearNew addrinfo ###### ip is %s#####\n",infoDelete.ToString().c_str());
             Delete(nIdDelete);
         }
     }
@@ -482,6 +486,7 @@ void CAddrMan::GetAddr_(std::vector<CAddress> &vAddr) {
         assert(mapInfo.count(vRandom[n]) == 1);
 
         const CAddrInfo &ai = mapInfo[vRandom[n]];
+        printf("GetAddr_ ###ip is %s#####\n",ai.ToString().c_str());
         if (!ai.IsTerrible()) vAddr.push_back(ai);
     }
 }
