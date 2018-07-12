@@ -51,6 +51,9 @@ SendCoinsEntry::SendCoinsEntry(const PlatformStyle *_platformStyle,
     // just a label for displaying bitcoin address(es)
     ui->payTo_is->setFont(GUIUtil::fixedPitchFont());
 
+    ui->line->setStyleSheet(" QFrame{background-color:#222831; }");
+
+
     // Connect signals
     connect(ui->payAmount, SIGNAL(valueChanged()), this,
             SIGNAL(payAmountChanged()));
