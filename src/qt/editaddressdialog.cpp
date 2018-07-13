@@ -118,6 +118,14 @@ void EditAddressDialog::accept() {
     QDialog::accept();
 }
 
+void EditAddressDialog::on_btnOK_clicked() {
+    this->accept();
+}
+
+void EditAddressDialog::on_btnCancel_clicked() {
+    this->reject();
+}
+
 QString EditAddressDialog::getAddress() const {
     return address;
 }

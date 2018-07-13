@@ -61,6 +61,8 @@ private Q_SLOTS:
     void on_ellipsisButton_clicked();
     void on_dataDirDefault_clicked();
     void on_dataDirCustom_clicked();
+    void on_btnOK_clicked();
+    void on_btnCancel_clicked();
 
 private:
     Ui::Intro *ui;

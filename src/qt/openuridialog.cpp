@@ -45,3 +45,11 @@ void OpenURIDialog::on_selectFileButton_clicked() {
     ui->uriEdit->setText(GUIUtil::bitcoinURIScheme(*cfg) +
                          ":?r=" + QUrl::toPercentEncoding(fileUri.toString()));
 }
+
+void OpenURIDialog::on_btnOK_clicked() {
+    this->accept();
+}
+
+void OpenURIDialog::on_btnCancel_clicked() {
+    this->reject();
+}
