@@ -32,6 +32,7 @@ private:
 
 private Q_SLOTS:
     void on_okButton_accepted();
+    void on_btnOK_clicked();
 };
 
 /** "Shutdown" window */

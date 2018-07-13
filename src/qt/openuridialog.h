@@ -27,9 +27,10 @@ protected Q_SLOTS:
 
 private Q_SLOTS:
     void on_selectFileButton_clicked();
+    void on_btnOK_clicked();
+    void on_btnCancel_clicked();
 
-private:
-    Ui::OpenURIDialog *ui;
+        private : Ui::OpenURIDialog *ui;
     const Config *cfg;
 };
 

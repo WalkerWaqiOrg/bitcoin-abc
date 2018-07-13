@@ -44,6 +44,7 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QFile>
 #include <QLibraryInfo>
 #include <QLocale>
 #include <QMessageBox>
@@ -53,7 +54,6 @@
 #include <QThread>
 #include <QTimer>
 #include <QTranslator>
-#include <QFile>
 
 #if defined(QT_STATICPLUGIN)
 #include <QtPlugin>
@@ -668,6 +668,15 @@ int main(int argc, char *argv[]) {
                      translator);
     translationInterface.Translate.connect(Translate);
 
+    // 10. Load the styleSheet
+    QFile file(":/css/res/skin.css");
+    if (!file.open(QIODevice::ReadOnly)) {
+        Q_ASSERT(false);
+    }
+    QString styleSheet = file.readAll();
+    app.setStyleSheet(styleSheet);
+    file.close();
+
     // Show help message immediately after parsing command-line options (for
     // "-lang") and setting locale, but before showing splash screen.
     if (gArgs.IsArgSet("-?") || gArgs.IsArgSet("-h") ||
@@ -782,14 +791,6 @@ int main(int argc, char *argv[]) {
     if (gArgs.GetBoolArg("-splash", DEFAULT_SPLASHSCREEN) &&
         !gArgs.GetBoolArg("-min", false))
         app.createSplashScreen(networkStyle.data());
-	//10. Load the styleSheet
-    QFile file(":/css/res/skin.css");
-    if (!file.open(QIODevice::ReadOnly)) {
-        Q_ASSERT(false);
-    }
-    QString styleSheet = file.readAll();
-    app.setStyleSheet(styleSheet);
-    file.close();
 
     try {
         app.createWindow(&config, networkStyle.data());

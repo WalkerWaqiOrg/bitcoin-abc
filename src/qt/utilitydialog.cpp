@@ -179,6 +179,10 @@ void HelpMessageDialog::on_okButton_accepted() {
     close();
 }
 
+void HelpMessageDialog::on_btnOK_clicked() {
+    this->accept();
+}
+
 /** "Shutdown" window */
 ShutdownWindow::ShutdownWindow(QWidget *parent, Qt::WindowFlags f)
     : QWidget(parent, f) {
