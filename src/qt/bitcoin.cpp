@@ -51,6 +51,7 @@
 #include <QSettings>
 #include <QSslConfiguration>
 #include <QStringList>
+#include <QStyleFactory>
 #include <QThread>
 #include <QTimer>
 #include <QTranslator>
@@ -667,7 +668,9 @@ int main(int argc, char *argv[]) {
     initTranslations(qtTranslatorBase, qtTranslator, translatorBase,
                      translator);
     translationInterface.Translate.connect(Translate);
-
+#ifndef Q_OS_WIN
+    QApplication::setStyle(QStyleFactory::create("fusion"));
+#endif
     // 10. Load the styleSheet
     QFile file(":/css/res/skin.css");
     if (!file.open(QIODevice::ReadOnly)) {
