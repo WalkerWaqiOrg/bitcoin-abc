@@ -43,6 +43,8 @@ private:
 private Q_SLOTS:
     void textChanged();
     void secureClearPassFields();
+    void on_btnCancel_clicked();
+    void on_btnOK_clicked();
 
 protected:
     bool event(QEvent *event) override;

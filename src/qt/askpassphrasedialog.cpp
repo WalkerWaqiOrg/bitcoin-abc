@@ -214,7 +214,7 @@ void AskPassphraseDialog::textChanged() {
                          !ui->passEdit3->text().isEmpty();
             break;
     }
-    ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(acceptable);
+    ui->btnOK->setEnabled(acceptable);
 }
 
 bool AskPassphraseDialog::event(QEvent *event) {
@@ -269,4 +269,12 @@ void AskPassphraseDialog::secureClearPassFields() {
     SecureClearQLineEdit(ui->passEdit1);
     SecureClearQLineEdit(ui->passEdit2);
     SecureClearQLineEdit(ui->passEdit3);
+}
+
+void AskPassphraseDialog::on_btnCancel_clicked() {
+    this->reject();
+}
+
+void AskPassphraseDialog::on_btnOK_clicked() {
+    this->accept();
 }
