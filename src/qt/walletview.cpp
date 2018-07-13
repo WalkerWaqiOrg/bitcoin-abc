@@ -45,7 +45,7 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, const Config *cfg,
     QPushButton *exportButton = new QPushButton(tr("&Export"), this);
     exportButton->setToolTip(
         tr("Export the data in the current tab to a file"));
-    exportButton->setStyleSheet(styleBtnRed.arg(64, 26));
+    exportButton->setStyleSheet(styleBtnRed.arg(64).arg(26));
     hbox_buttons->addStretch();
     hbox_buttons->addWidget(exportButton);
     vbox->addLayout(hbox_buttons);

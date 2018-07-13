@@ -16,6 +16,7 @@
 #include "transactionrecord.h"
 #include "transactiontablemodel.h"
 #include "walletmodel.h"
+#include "stylesheet.h"
 
 #include "ui_interface.h"
 
@@ -23,7 +24,6 @@
 #include <QDateTimeEdit>
 #include <QDesktopServices>
 #include <QDoubleValidator>
-#include <QHBoxLayout>
 #include <QHeaderView>
 #include <QLabel>
 #include <QLineEdit>
@@ -34,6 +34,8 @@
 #include <QTableView>
 #include <QUrl>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QPushButton>
 
 TransactionView::TransactionView(const PlatformStyle *platformStyle,
                                  QWidget *parent)
@@ -42,16 +44,23 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle,
     // Build filter row
     setContentsMargins(0, 0, 0, 0);
 
+    QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+    horizontalLayout->setSpacing(0);
+    horizontalLayout->setContentsMargins(11, 11, 11, 11);
+
+    QFrame* frame2 = new QFrame(this);
+    frame2->setStyleSheet(styleFrame);
+
+    QVBoxLayout *verticalLayout = new QVBoxLayout(frame2);
+    verticalLayout->setSpacing(10);
+    verticalLayout->setContentsMargins(0, 0, 0, 0);
+    verticalLayout->setContentsMargins(0, 15, 0, 0);
+
     QHBoxLayout *hlayout = new QHBoxLayout();
     hlayout->setContentsMargins(0, 0, 0, 0);
 
-    if (platformStyle->getUseExtraSpacing()) {
-        hlayout->setSpacing(5);
-        hlayout->addSpacing(26);
-    } else {
-        hlayout->setSpacing(0);
-        hlayout->addSpacing(23);
-    }
+    hlayout->setSpacing(6);
+    hlayout->addSpacing(13);
 
     watchOnlyWidget = new QComboBox(this);
     watchOnlyWidget->setFixedWidth(24);
@@ -121,15 +130,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle,
     amountWidget->setValidator(new QDoubleValidator(0, 1e20, 8, this));
     hlayout->addWidget(amountWidget);
 
-    QVBoxLayout *vlayout = new QVBoxLayout(this);
-    vlayout->setContentsMargins(0, 0, 0, 0);
-    vlayout->setSpacing(0);
-
     QTableView *view = new QTableView(this);
-    vlayout->addLayout(hlayout);
-    vlayout->addWidget(createDateRangeWidget());
-    vlayout->addWidget(view);
-    vlayout->setSpacing(0);
     int width = view->verticalScrollBar()->sizeHint().width();
     // Cover scroll bar width with spacing
     if (platformStyle->getUseExtraSpacing()) {
@@ -137,8 +138,14 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle,
     } else {
         hlayout->addSpacing(width);
     }
+
+    verticalLayout->addLayout(hlayout);
+    verticalLayout->addWidget(createDateRangeWidget());
+    verticalLayout->addWidget(view);
+
+    horizontalLayout->addWidget(frame2);
     // Always show scroll bar
-    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     view->setTabKeyNavigation(false);
     view->setContextMenuPolicy(Qt::CustomContextMenu);
 

@@ -305,19 +305,16 @@ QComboBox{
 	min-height:24px;
 	border-radius:3px;
 	background-color:#191F29;
-	subcontrol-origin: padding;
-	subcontrol-position: top right;
 }
 
 QComboBox::drop-down {
-	subcontrol-origin: padding;
-	subcontrol-position: top right;
-	width: 30px;
+	padding-right:10px;
+	subcontrol-position: center right;
 	border-left-width: 0px;
-	border-left-color: gray;
+	border-left-color: 191F29;
 	border-left-style: solid;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
 	image: url(:/picture/down);
 }
 
@@ -884,17 +881,9 @@ ReceiveCoinsDialog QPushButton#receiveButton
 	max-height:26px;
 }
 
-WalletView QPushButton#exportButton{
-	min-width:64px;
-	max-width:64px;
-	min-height:26px;
-	max-height:26px;
-}
-
 ReceiveRequestDialog QPushButton#buttonBox,
 SendCoinsDialog QPushButton#sendButton,
 ReceiveCoinsDialog QPushButton#receiveButton,
-WalletView QPushButton#exportButton,
 AddressBookPage QPushButton#exportButton,
 OptionsDialog QPushButton#okButton,
 QPushButton#btnOK
@@ -910,7 +899,6 @@ QPushButton#btnOK
 ReceiveRequestDialog QPushButton#buttonBox:hover,
 SendCoinsDialog QPushButton#sendButton:hover,
 ReceiveCoinsDialog QPushButton#receiveButton:hover,
-WalletView QPushButton#exportButton:hover,
 AddressBookPage QPushButton#exportButton:hover,
 OptionsDialog QPushButton#okButton:hover,
 QPushButton#btnOK:hover
@@ -922,7 +910,6 @@ QPushButton#btnOK:hover
 ReceiveRequestDialog QPushButton#buttonBox:press,
 SendCoinsDialog QPushButton#sendButton:press,
 ReceiveCoinsDialog QPushButton#receiveButton:press,
-WalletView QPushButton#exportButton:press,
 AddressBookPage QPushButton#exportButton:press,
 OptionsDialog QPushButton#okButton:press,
 AskPassphraseDialog QPushButton#btnOK:press
@@ -934,7 +921,6 @@ AskPassphraseDialog QPushButton#btnOK:press
 ReceiveRequestDialog QPushButton#buttonBox:disabled,
 SendCoinsDialog QPushButton#sendButton:disabled,
 ReceiveCoinsDialog QPushButton#receiveButton:disabled,
-WalletView QPushButton#exportButton:disabled,
 AddressBookPage QPushButton#exportButton:disabled,
 OptionsDialog QPushButton#okButton:disabled,
 QPushButton#btnOK:disabled
@@ -1001,5 +987,8 @@ QLabel#aboutMessage{
 }
 QWidget#scrollAreaWidgetContents{
 	background-color:#191F29;
+	border:none;
+}
+HelpMessageDialog QFrame#frame_2{
 	border:none;
 }
