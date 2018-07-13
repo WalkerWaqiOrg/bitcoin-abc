@@ -44,15 +44,18 @@ static const QString styleBtnRed =
             "	x2: 1, y2: 0, stop: 0 rgba(252,172,141,0.5), stop: 1 "
             "rgba(229,101,143,0.5));}");
 
-static const QString styleLabelBlack =
-    QString("QLabel#label_2{"
+static const QString styleLabelNormal =
+    QString("QLabel{"
             "	font-size:12px;"
+            "   font-family:\"Microsoft YaHei\";"
             "	color:rgba(130,133,138,1);}");
 
-static const QString styleLabelWhite =
-    QString("QLabel#label{"
+static const QString styleLabelColor =
+    QString("QLabel{"
             "	font-size:12px;"
-            "	color:rgba(209,209,209,1);}");
+            "   font-family:\"Microsoft YaHei\";"
+            "   color: QLinearGradient(x1 : 0, y1 : 0, x2 : 1, y2 : 0,"
+            "   stop : 0 rgba(252, 172, 141, 1), stop : 1 rgba(229, 101, 143, 1));}");
 
 static const QString styleFrame = QString("QFrame{background-color:rgba(25,31,41,1);}");
 
