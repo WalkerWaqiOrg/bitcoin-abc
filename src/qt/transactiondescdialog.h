@@ -23,7 +23,10 @@ public:
     explicit TransactionDescDialog(const QModelIndex &idx, QWidget *parent = 0);
     ~TransactionDescDialog();
 
-private:
+private slots:
+    void on_btnCancel_clicked();
+
+private :
     Ui::TransactionDescDialog *ui;
 };
 

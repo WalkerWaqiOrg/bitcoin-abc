@@ -190,8 +190,6 @@ BitcoinGUI::BitcoinGUI(const Config *cfg, const PlatformStyle *_platformStyle,
     // Progress bar and label for blocks download
     progressBarLabel = new QLabel();
     progressBarLabel->setVisible(false);
-    progressBarLabel->setStyleSheet(
-        "QLabel{font-size: 12px;color:rgba(130,133,138,1);}");
     progressBar = new GUIUtil::ProgressBar();
     progressBar->setAlignment(Qt::AlignCenter);
     progressBar->setVisible(false);
@@ -200,13 +198,6 @@ BitcoinGUI::BitcoinGUI(const Config *cfg, const PlatformStyle *_platformStyle,
     // progress bar, as they make the text unreadable (workaround for issue
     // #1071)
     // See https://qt-project.org/doc/qt-4.8/gallery.html
-    progressBar->setStyleSheet(
-        "QProgressBar { background-color: #191F29; border: 0px solid grey; "
-        "min-height:6px; max-height: 6px;"
-        "border-radius: 3px; padding: 1px; text-align: right; } "
-        "QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, "
-        "x2: 1, y2: 0, stop: 0 #FCAC8D, stop: 1 #E5658F); border-radius: "
-        "3px; margin: 0px; }");
     progressBar->setTextVisible(false);
 
     m_pBarText = new QLabel(this);
@@ -286,7 +277,7 @@ void BitcoinGUI::createActions() {
                                                   "QToolButton:pressed{"
                                                   "	font-size:10px;"
                                                   "	color:rgb(255, 255, 255);}"
-                                                  "QToolButton:checked{"
+                                                  "QToolButton:disabled{"
                                                   "	font-size:10px;"
                                                   "	color:rgb(255, 255, 255);}";
 
@@ -631,6 +622,7 @@ void BitcoinGUI::setClientModel(ClientModel *_clientModel) {
 bool BitcoinGUI::addWallet(const QString &name, WalletModel *walletModel) {
     if (!walletFrame) return false;
     setWalletActionsEnabled(true);
+    overviewAction->setDisabled(true);
     return walletFrame->addWallet(name, walletModel);
 }
 
@@ -1297,8 +1289,8 @@ UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(
     }
     setMinimumSize(max_width, 0);
     setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    setStyleSheet(QString("QLabel { color : %1 }")
-                      .arg(platformStyle->SingleColor().name()));
+    //setStyleSheet(QString("QLabel { color : %1 }")
+    //                  .arg(platformStyle->SingleColor().name()));
 }
 
 /** So that it responds to button clicks */
