@@ -270,6 +270,7 @@ void BitcoinGUI::setToolBarIcon(QToolButton *pButton, const QString &normalImag,
 void BitcoinGUI::createActions() {
     const static QString defaultToolButtonStyle = "QToolButton{"
                                                   "	font-size:10px;"
+                                                  "background-color:#0E1302;"
                                                   "	color:rgb(153,153,153);}"
                                                   "QToolButton:hover{"
                                                   "	font-size:10px;"
