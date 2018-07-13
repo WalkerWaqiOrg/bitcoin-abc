@@ -42,6 +42,10 @@ public:
 public Q_SLOTS:
     void accept() override;
 
+private slots:
+    void on_btnOK_clicked();
+    void on_btnCancel_clicked();
+
 private:
     bool saveCurrentRow();
 

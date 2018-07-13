@@ -24,3 +24,7 @@ TransactionDescDialog::TransactionDescDialog(const QModelIndex &idx,
 TransactionDescDialog::~TransactionDescDialog() {
     delete ui;
 }
+
+void TransactionDescDialog::on_btnCancel_clicked() {
+    this->reject();
+}

@@ -11,6 +11,7 @@
 #include "intro.h"
 #include "ui_intro.h"
 #include "util.h"
+#include "stylesheet.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -235,20 +236,20 @@ void Intro::setStatus(int status, const QString &message,
             tr("%n GB of free space available", "", bytesAvailable / GB_BYTES);
         if (bytesAvailable < requiredSpace * GB_BYTES) {
             freeString += " " + tr("(of %n GB needed)", "", requiredSpace);
-            ui->freeSpace->setStyleSheet("QLabel { color: #800000 }");
+            ui->freeSpace->setStyleSheet(styleLabelColor);
         } else {
-            ui->freeSpace->setStyleSheet("");
+            ui->freeSpace->setStyleSheet(styleLabelNormal);
         }
         ui->freeSpace->setText(freeString + ".");
     }
     /* Don't allow confirm in ERROR state */
-    ui->buttonBox->button(QDialogButtonBox::Ok)
-        ->setEnabled(status != FreespaceChecker::ST_ERROR);
+    
+    ui->btnOK->setEnabled(status != FreespaceChecker::ST_ERROR);
 }
 
 void Intro::on_dataDirectory_textChanged(const QString &dataDirStr) {
     /* Disable OK button until check result comes in */
-    ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+    ui->btnOK->setEnabled(false);
     checkPath(dataDirStr);
 }
 
@@ -265,6 +266,14 @@ void Intro::on_dataDirDefault_clicked() {
 void Intro::on_dataDirCustom_clicked() {
     ui->dataDirectory->setEnabled(true);
     ui->ellipsisButton->setEnabled(true);
+}
+
+void Intro::on_btnOK_clicked() {
+    this->accept();
+}
+
+void Intro::on_btnCancel_clicked() {
+    this->reject();
 }
 
 void Intro::startThread() {
