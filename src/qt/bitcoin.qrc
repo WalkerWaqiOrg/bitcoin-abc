@@ -106,5 +106,7 @@
         <file alias="down_hover">res/icons/down_hover.png</file>
         <file alias="top">res/icons/top.png</file>
         <file alias="top_hover">res/icons/top_hover.png</file>
+        <file alias="circle">res/icons/circle.png</file>
+        <file alias="circle_hover">res/icons/circle_hover.png</file>
     </qresource>
 </RCC>
