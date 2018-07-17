@@ -181,7 +181,7 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent) {
 
 QString bitcoinURIScheme(const CChainParams &params, bool useCashAddr) {
     if (!useCashAddr) {
-        return "bitcoincash";
+        return "rr";
     }
     return QString::fromStdString(params.CashAddrPrefix());
 }
