@@ -95,21 +95,19 @@ QImage PlatformStyle::SingleColorImage(const QString &filename) const {
 }
 
 QIcon PlatformStyle::SingleColorIcon(const QString &filename) const {
-    if (!colorizeIcons) return QIcon(filename);
-    return ColorizeIcon(filename, SingleColor());
+    return QIcon(filename);
 }
 
 QIcon PlatformStyle::SingleColorIcon(const QIcon &icon) const {
-    if (!colorizeIcons) return icon;
-    return ColorizeIcon(icon, SingleColor());
+    return icon;
 }
 
 QIcon PlatformStyle::TextColorIcon(const QString &filename) const {
-    return ColorizeIcon(filename, TextColor());
+    return QIcon(filename);
 }
 
 QIcon PlatformStyle::TextColorIcon(const QIcon &icon) const {
-    return ColorizeIcon(icon, TextColor());
+    return icon;
 }
 
 const PlatformStyle *PlatformStyle::instantiate(const QString &platformId) {
