@@ -56,12 +56,12 @@ public:
 /** A writer stream (for serialization) that computes a 256-bit hash. */
 class CRRHashWriter {
 private:
-    CHash256 ctx;
+    //CHash256 ctx;
 
     const int nType;
     const int nVersion;
 
-    CRRHash hash_;
+    static CRRHash hash_;
     std::string buffer;
 
 public:
@@ -80,7 +80,7 @@ public:
     uint256 GetHash() {
         uint256 result;
         // ctx.Finalize((uint8_t *)&result);
-	    hash_.Hash(buffer.data(), buffer.length(), (unsigned char*)&result);
+	    CRRHashWriter::hash_.Hash(buffer.data(), buffer.length(), (unsigned char*)&result);
         return result;
     }
 

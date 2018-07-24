@@ -103,7 +103,7 @@ public:
         consensus.BIP66Height = 0;              // 363725;
         consensus.antiReplayOpReturnSunsetHeight = 530000;
         consensus.antiReplayOpReturnCommitment = GetAntiReplayCommitment();
-        consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");  // uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.powLimit = uint256S("0fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");  // uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         // two weeks
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60;
         consensus.nPowTargetSpacing = 1 * 60;
@@ -164,10 +164,10 @@ public:
         nDefaultPort = 8333;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1525656448, 856190, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1525656448, 4, 0x200ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock ==
-               uint256S("000007b23c9d4f23eaf3979750aea675332aea7d81b87c2fbd4e4f910c612f7c"));
+               uint256S("01867cbccb3ca86a17747fdef04c446656aacb5fd4a1bedee339525cce4de640"));
         assert(genesis.hashMerkleRoot ==
                uint256S("821d2f9486be20f121aeb41c7afc160826ce05507004e3c3569d63f1ddb6160c"));
 
@@ -191,7 +191,7 @@ public:
         // // criptolayer.net
         // vSeeds.push_back(
         //     CDNSSeedData("criptolayer.net", "seeder.criptolayer.net", true));
-        vSeeds.push_back(CDNSSeedData("node5.rrnc.io", "seed.node5.rrnc.io", true));
+        // vSeeds.push_back(CDNSSeedData("node5.rrnc.io", "seed.node5.rrnc.io", true));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<uint8_t>(1, 0);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<uint8_t>(1, 5);
