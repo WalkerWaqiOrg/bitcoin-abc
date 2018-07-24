@@ -7,14 +7,62 @@
 #define BITCOIN_RRHASH_H
 
 #include "hash.h"
+#include <dlfcn.h>
+
+#define RRHASH_LIB_PATH         "./librrhash.so"
+#define RRHASH_LIB_PATH_WIN     "./librrhash.dll"
+#define RRHASH_LIB_FUNC         "run_all"
+
+typedef void (*RUN_RRHASH_FUNC)(const char *data, size_t length, unsigned char *hash);
+
+class CRRHash {
+private:
+    void*               rrhash_handle_;
+    RUN_RRHASH_FUNC     rrhash_func;
+
+public:
+    CRRHash()
+    {
+#ifdef WIN32
+	    rrhash_handle_ = dlopen(RRHASH_LIB_PATH_WIN, RTLD_LAZY);
+#else
+	    rrhash_handle_ = dlopen(RRHASH_LIB_PATH, RTLD_LAZY);
+#endif
+        if (!rrhash_handle_) {
+            fprintf(stderr, "%s\n", dlerror());
+            exit(EXIT_FAILURE);
+        }
+
+        rrhash_func = (RUN_RRHASH_FUNC)dlsym(rrhash_handle_, RRHASH_LIB_FUNC);
+        if (dlerror() != NULL)  {
+            fprintf(stderr, "%s\n", dlerror());
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    ~CRRHash()
+    {
+        if (rrhash_handle_) {
+            dlclose(rrhash_handle_);
+        }
+    }
+
+    void Hash(const char *data, size_t length, unsigned char *hash)
+    {
+        rrhash_func(data, length, hash);
+    }
+};
 
 /** A writer stream (for serialization) that computes a 256-bit hash. */
 class CRRHashWriter {
 private:
-    CHash256 ctx;
+    //CHash256 ctx;
 
     const int nType;
     const int nVersion;
+
+    static CRRHash hash_;
+    std::string buffer;
 
 public:
     CRRHashWriter(int nTypeIn, int nVersionIn)
@@ -24,13 +72,15 @@ public:
     int GetVersion() const { return nVersion; }
 
     void write(const char *pch, size_t size) {
-        ctx.Write((const uint8_t *)pch, size);
+        // ctx.Write((const uint8_t *)pch, size);
+        buffer.append(pch,size);
     }
 
     // invalidates the object
     uint256 GetHash() {
         uint256 result;
-        ctx.Finalize((uint8_t *)&result);
+        // ctx.Finalize((uint8_t *)&result);
+	    CRRHashWriter::hash_.Hash(buffer.data(), buffer.length(), (unsigned char*)&result);
         return result;
     }
 
