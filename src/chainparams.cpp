@@ -14,6 +14,8 @@
 
 #include "chainparamsseeds.h"
 
+#include "arith_uint256.h"
+
 // Far into the future.
 static const std::string ANTI_REPLAY_COMMITMENT =
     "Bitcoin: A Peer-to-Peer Electronic Cash System";
@@ -78,6 +80,25 @@ void CChainParams::UpdateBIP9Parameters(Consensus::DeploymentPos d,
                                         int64_t nStartTime, int64_t nTimeout) {
     consensus.vDeployments[d].nStartTime = nStartTime;
     consensus.vDeployments[d].nTimeout = nTimeout;
+}
+
+bool RRCheckProofOfWork(uint256 hash, uint32_t nBits) {
+    bool fNegative;
+    bool fOverflow;
+    arith_uint256 bnTarget;
+    bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
+
+    // Check range
+    if (fNegative || bnTarget == 0 || fOverflow) {
+        return false;
+    }
+
+    // Check proof of work matches claimed amount
+    if (UintToArith256(hash) > bnTarget) {
+        return false;
+    }
+
+    return true;
 }
 
 /**
@@ -164,8 +185,25 @@ public:
         nDefaultPort = 8333;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1525656448, 856190, 0x1e0ffff0, 1, 50 * COIN);
+        //genesis = CreateGenesisBlock(1525656448, 856190, 0x1e0ffff0, 1, 50 * COIN);
+
+        std::cout<<"###############start get block hash##############" << std::endl;
+        genesis = CreateGenesisBlock(1525656448, 0, 0x200ffff0, 1, 50 * COIN);
+        while(!RRCheckProofOfWork(genesis.GetHash(), genesis.nBits)) {
+            consensus.hashGenesisBlock = genesis.GetHash();
+            std::cout<< "hashGenesisBlock : " << consensus.hashGenesisBlock.GetHex()<< std::endl;
+
+            ++genesis.nNonce;
+        }
+
         consensus.hashGenesisBlock = genesis.GetHash();
+
+        std::cout<<"#############################" << std::endl;
+        std::cout<<"genesis.nNonce :" << genesis.nNonce<< std::endl;
+        std::cout<< "hashGenesisBlock : " << consensus.hashGenesisBlock.GetHex()<< std::endl;
+        std::cout<< "hashMerkleRoot : " << genesis.hashMerkleRoot.GetHex()<< std::endl;
+        std::cout<<"#############################" << std::endl;
+
         assert(consensus.hashGenesisBlock ==
                uint256S("000007b23c9d4f23eaf3979750aea675332aea7d81b87c2fbd4e4f910c612f7c"));
         assert(genesis.hashMerkleRoot ==
