@@ -28,3 +28,4 @@ std::string CBlock::ToString() const {
 }
 
 CRRHash CRRHashWriter::hash_;
+std::mutex CRRHashWriter::mutex_;

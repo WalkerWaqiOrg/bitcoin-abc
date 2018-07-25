@@ -8,6 +8,7 @@
 
 #include "hash.h"
 #include <dlfcn.h>
+#include <mutex>
 
 #define RRHASH_LIB_PATH         "./librrhash.so"
 #define RRHASH_LIB_PATH_WIN     "./librrhash.dll"
@@ -62,6 +63,7 @@ private:
     const int nVersion;
 
     static CRRHash hash_;
+    static std::mutex mutex_;
     std::string buffer;
 
 public:
@@ -80,7 +82,10 @@ public:
     uint256 GetHash() {
         uint256 result;
         // ctx.Finalize((uint8_t *)&result);
-	    CRRHashWriter::hash_.Hash(buffer.data(), buffer.length(), (unsigned char*)&result);
+        {
+            std::unique_lock<std::mutex> lock(CRRHashWriter::mutex_);
+            CRRHashWriter::hash_.Hash(buffer.data(), buffer.length(), (unsigned char*)&result);
+        }
         return result;
     }
 
