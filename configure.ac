@@ -22,8 +22,6 @@ BITCOIN_SEEDER_NAME=bitcoin-seeder
 
 AC_CANONICAL_HOST
 
-LIBS="-ldl"
-
 AH_TOP([#ifndef BITCOIN_BITCOIN_CONFIG_H])
 AH_TOP([#define BITCOIN_BITCOIN_CONFIG_H])
 AH_BOTTOM([#endif // BITCOIN_BITCOIN_CONFIG_H])
@@ -375,9 +373,13 @@ AC_ARG_WITH([seeder],
   [build_bitcoin_seeder=$withval],
   [build_bitcoin_seeder=yes])
 
+LIBS="-ldl"
+
 use_pkgconfig=yes
 case $host in
   *mingw*)
+
+     LIBS="$LIBS -lpsapi"
 
      #pkgconfig does more harm than good with MinGW
      use_pkgconfig=no
