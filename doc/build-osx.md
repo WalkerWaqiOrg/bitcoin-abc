@@ -29,12 +29,12 @@ In case you want to build the disk image with `make deploy` (.dmg / optional), y
 
     brew install librsvg
 
-Build Bitcoin ABC
+Build RR CHAIN
 -----------------
 
-1. Clone the Bitcoin ABC source code and cd into `bitcoin-abc`
+1. Clone the RR CHAIN source code and cd into `bitcoin-abc`
 
-        git clone github.com/Bitcoin-ABC/bitcoin-abc
+        git clone https://github.com/WalkerWaqiOrg/bitcoin-abc.git
         cd bitcoin-abc
 
 2.  Build bitcoin-abc:
@@ -58,7 +58,7 @@ Build Bitcoin ABC
 Running
 -------
 
-Bitcoin ABC is now available at `./src/bitcoind`
+RR CHAIN is now available at `./src/rrcd`
 
 Before running, it's recommended you create an RPC configuration file.
 
@@ -66,7 +66,7 @@ Before running, it's recommended you create an RPC configuration file.
 
     chmod 600 "/Users/${USER}/Library/Application Support/Bitcoin/bitcoin.conf"
 
-The first time you run bitcoind, it will start downloading the blockchain. This process could take several hours.
+The first time you run rrcd, it will start downloading the blockchain. This process could take several hours.
 
 You can monitor the download process by looking at the debug.log file:
 
@@ -75,9 +75,9 @@ You can monitor the download process by looking at the debug.log file:
 Other commands:
 -------
 
-    ./src/bitcoind -daemon # Starts the bitcoin daemon.
-    ./src/bitcoin-cli --help # Outputs a list of command-line options.
-    ./src/bitcoin-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/rrcd -daemon # Starts the rrc daemon.
+    ./src/rrc-cli --help # Outputs a list of command-line options.
+    ./src/rrc-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Using Qt Creator as IDE
 ------------------------
