@@ -165,7 +165,7 @@ extern const std::string CURRENCY_UNIT;
  */
 static const Amount MAX_MONEY = 1800000000 * COIN;
 static const Amount PREMINE_MONEY = 1260000000 * COIN;
-static const Amount  EMISSION_SPEED_FACTOR =  Amount(19);
+static const Amount  EMISSION_SPEED_FACTOR =  Amount(16);
 inline bool MoneyRange(const Amount nValue) {
     return (nValue >= Amount(0) && nValue <= MAX_MONEY);
 }
