@@ -551,12 +551,12 @@ static UniValue getblocktemplate(const Config &config,
 
     if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0) {
         throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED,
-                           "Bitcoin is not connected!");
+                           "RRCoin is not connected!");
     }
 
     if (IsInitialBlockDownload()) {
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                           "Bitcoin is downloading blocks...");
+                           "RRCoin is downloading blocks...");
     }
 
     static unsigned int nTransactionsUpdatedLast;
@@ -972,7 +972,7 @@ static UniValue estimatesmartfee(const Config &config,
             "\nResult:\n"
             "{\n"
             "  \"feerate\" : x.x,     (numeric) estimate fee-per-kilobyte (in "
-            "BCH)\n"
+            "RRC)\n"
             "  \"blocks\" : n         (numeric) block number where estimate "
             "was found\n"
             "}\n"

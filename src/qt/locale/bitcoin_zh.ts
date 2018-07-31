@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Warning: Invalid Bitcoin address</source>
-        <translation>警告：RRC地址无效</translation>
+        <translation>警告：RRCoin地址无效</translation>
     </message>
     </context>
 <context>
