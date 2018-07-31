@@ -22,7 +22,7 @@ Table of Contents
 
 - [Preparing the Gitian builder host](#preparing-the-gitian-builder-host)
 - [Setting up the Gitian image](#setting-up-the-gitian-image)
-- [Building Bitcoin ABC](#building-bitcoin-abc)
+- [Building RR CHAIN](#building-rr-chain)
 
 
 Preparing the Gitian builder host
@@ -94,13 +94,13 @@ bin/make-base-vm --lxc --arch amd64 --suite xenial
 There will be a lot of warnings printed during the build of the image. These
 can be ignored.
 
-Building Bitcoin ABC
+Building RR CHAIN
 --------------------
 
-To build Bitcoin ABC (for Linux, OS X and Windows) run the following commands:
+To build RR CHAIN (for Linux, OS X and Windows) run the following commands:
 
 ```bash
-URL=https://github.com/bitcoin-abc/bitcoin-abc.git
+URL=https://github.com/RRNCIO/RRChain.git
 COMMIT=v0.16.0 # or whatever release tag you wish
 
 # Note the path to descriptors assumes vagrant was used.  These files are within the ABC repository normally.

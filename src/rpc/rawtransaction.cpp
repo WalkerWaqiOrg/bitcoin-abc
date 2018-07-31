@@ -191,7 +191,7 @@ static UniValue getrawtransaction(const Config &config,
             "         \"type\" : \"pubkeyhash\",  (string) The type, eg "
             "'pubkeyhash'\n"
             "         \"addresses\" : [           (json array of string)\n"
-            "           \"address\"        (string) bitcoin address\n"
+            "           \"address\"        (string) rrc address\n"
             "           ,...\n"
             "         ]\n"
             "       }\n"
@@ -447,7 +447,7 @@ static UniValue createrawtransaction(const Config &config,
             "with outputs\n"
             "    {\n"
             "      \"address\": x.xxx,    (numeric or string, required) The "
-            "key is the bitcoin address, the numeric value (can be string) is "
+            "key is the rrc address, the numeric value (can be string) is "
             "the " +
             CURRENCY_UNIT +
             " amount\n"
@@ -552,7 +552,7 @@ static UniValue createrawtransaction(const Config &config,
                 DecodeDestination(name_, config.GetChainParams());
             if (!IsValidDestination(destination)) {
                 throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY,
-                                   std::string("Invalid Bitcoin address: ") +
+                                   std::string("Invalid rrc address: ") +
                                        name_);
             }
 
@@ -620,7 +620,7 @@ static UniValue decoderawtransaction(const Config &config,
             "'pubkeyhash'\n"
             "         \"addresses\" : [           (json array of string)\n"
             "           \"12tvKAXCxZjSmdNbao16dKXC8tRWfcF5oc\"   (string) "
-            "bitcoin address\n"
+            "rrc address\n"
             "           ,...\n"
             "         ]\n"
             "       }\n"
@@ -664,7 +664,7 @@ static UniValue decodescript(const Config &config,
             "  \"type\":\"type\", (string) The output type\n"
             "  \"reqSigs\": n,    (numeric) The required signatures\n"
             "  \"addresses\": [   (json array of string)\n"
-            "     \"address\"     (string) bitcoin address\n"
+            "     \"address\"     (string) rrc address\n"
             "     ,...\n"
             "  ],\n"
             "  \"p2sh\",\"address\" (string) address of P2SH script wrapping "

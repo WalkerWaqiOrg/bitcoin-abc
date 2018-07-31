@@ -92,7 +92,7 @@ bool AppInit(int argc, char *argv[]) {
             strUsage += FormatParagraph(LicenseInfo());
         } else {
             strUsage += "\n" + _("Usage:") + "\n" +
-                        "  bitcoind [options]                     " +
+                        "  rrcd [options]                     " +
                         strprintf(_("Start %s Daemon"), _(PACKAGE_NAME)) + "\n";
 
             strUsage += "\n" + HelpMessage(HMM_BITCOIND);
@@ -133,7 +133,7 @@ bool AppInit(int argc, char *argv[]) {
 
         if (fCommandLine) {
             fprintf(stderr, "Error: There is no RPC client functionality in "
-                            "bitcoind anymore. Use the bitcoin-cli utility "
+                            "rrcd anymore. Use the rrc-cli utility "
                             "instead.\n");
             exit(EXIT_FAILURE);
         }
