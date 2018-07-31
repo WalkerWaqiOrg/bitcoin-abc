@@ -161,7 +161,7 @@ public:
         netMagic[1] = 0x61;
         netMagic[2] = 0x69;
         netMagic[3] = 0x6e;
-        nDefaultPort = 8333;
+        nDefaultPort = 7333;
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(1525656448, 29, 0x200ffff0, 1, 50 * COIN);

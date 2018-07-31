@@ -31,7 +31,7 @@ void AppendParamsHelpMessages(std::string &strUsage, bool debugHelp) {
  */
 class CBaseMainParams : public CBaseChainParams {
 public:
-    CBaseMainParams() { nRPCPort = 8332; }
+    CBaseMainParams() { nRPCPort = 7332; }
 };
 
 /**
