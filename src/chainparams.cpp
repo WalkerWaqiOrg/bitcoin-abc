@@ -101,7 +101,7 @@ public:
         consensus.BIP65Height = 0;              // 388381;
         // 00000000000000000379eaa19dce8c9b722d46ae6a57c2f1a988119488b50931
         consensus.BIP66Height = 0;              // 363725;
-        consensus.antiReplayOpReturnSunsetHeight = 530000;
+        consensus.antiReplayOpReturnSunsetHeight = 0;
         consensus.antiReplayOpReturnCommitment = GetAntiReplayCommitment();
         consensus.powLimit = uint256S("0fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");  // uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         // two weeks
