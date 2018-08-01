@@ -51,7 +51,7 @@ static const Amount DEFAULT_TRANSACTION_MINFEE(1000);
 //! minimum recommended increment for BIP 125 replacement txs
 static const Amount WALLET_INCREMENTAL_RELAY_FEE(5000);
 //! target minimum change amount
-static const Amount MIN_CHANGE = CENT;
+static const Amount MIN_CHANGE = RRC_COIN_RATE.GetSatoshis() * CENT;
 //! final minimum change amount after paying for fees
 static const Amount MIN_FINAL_CHANGE = MIN_CHANGE / 2;
 //! Default for -spendzeroconfchange
