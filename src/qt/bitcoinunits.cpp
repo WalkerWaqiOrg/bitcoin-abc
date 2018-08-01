@@ -53,22 +53,22 @@ QString BitcoinUnits::description(int unit) {
 qint64 BitcoinUnits::factor(int unit) {
     switch (unit) {
         case BCH:
-            return 100;
+            return 10000;
         case cBCH:
-            return 1;
-        default:
             return 100;
+        default:
+            return 10000;
     }
 }
 
 int BitcoinUnits::decimals(int unit) {
     switch (unit) {
         case BCH:
-            return 2;
+            return 4;
         case cBCH:
-            return 0;
-        default:
             return 2;
+        default:
+            return 4;
     }
 }
 

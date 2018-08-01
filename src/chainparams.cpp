@@ -48,7 +48,7 @@ static CBlock CreateGenesisBlock(const char *pszTimestamp,
     genesis.vtx.push_back(MakeTransactionRef(std::move(txNew)));
     genesis.hashPrevBlock.SetNull();
     genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
-    genesis.nAlreadyGeneratedCoins = 5000;
+    genesis.nAlreadyGeneratedCoins = 50 * COIN.GetSatoshis();
     return genesis;
 }
 
@@ -164,12 +164,12 @@ public:
         nDefaultPort = 7333;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1525656448, 48, 0x2000ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1525656448, 1279, 0x2000ffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock ==
-               uint256S("00b74d7868fbdef6e601df0eba0effcfccd31adb894b44f9b241b2b10739bf43"));
+               uint256S("006c8b22d77173236a47a4f9bf58b90ee49e2635829efd644227714c15fea9a7"));
         assert(genesis.hashMerkleRoot ==
-               uint256S("821d2f9486be20f121aeb41c7afc160826ce05507004e3c3569d63f1ddb6160c"));
+               uint256S("56164192ae5d5a1df43cc8fad1d129e036ba27b705b8af2afb48f2cfa8be1410"));
 
         // Note that of those with the service bits flag, most only support a
         // subset of possible options.

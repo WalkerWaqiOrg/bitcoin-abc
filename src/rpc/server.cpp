@@ -114,7 +114,7 @@ Amount AmountFromValue(const UniValue &value) {
         throw JSONRPCError(RPC_TYPE_ERROR, "Amount is not a number or string");
 
     int64_t n;
-    if (!ParseFixedPoint(value.getValStr(), 2, &n))
+    if (!ParseFixedPoint(value.getValStr(), 4, &n))
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
 
     Amount amt(n);
@@ -129,7 +129,7 @@ UniValue ValueFromAmount(const Amount &amount) {
     int64_t n_abs = (sign ? -amt : amt);
     int64_t quotient = n_abs / COIN.GetSatoshis();
     int64_t remainder = n_abs % COIN.GetSatoshis();
-    return UniValue(UniValue::VNUM, strprintf("%s%d.%02d", sign ? "-" : "",
+    return UniValue(UniValue::VNUM, strprintf("%s%d.%04d", sign ? "-" : "",
                                               quotient, remainder));
 }
 

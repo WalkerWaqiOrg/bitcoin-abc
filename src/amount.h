@@ -147,9 +147,9 @@ public:
     }
 };
 
-static const Amount RRC_COIN_RATE (1000);
-static const Amount COIN(Amount(100000)/RRC_COIN_RATE);
-static const Amount CENT(Amount(1000)/RRC_COIN_RATE);
+static const Amount RRC_COIN_RATE (10000);
+static const Amount COIN(Amount(100000000)/RRC_COIN_RATE);
+static const Amount CENT(Amount(1000000)/RRC_COIN_RATE);
 
 extern const std::string CURRENCY_UNIT;
 

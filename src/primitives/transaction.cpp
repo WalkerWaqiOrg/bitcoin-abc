@@ -48,7 +48,7 @@ CTxOut::CTxOut(const Amount &nValueIn, CScript scriptPubKeyIn) {
 }
 
 std::string CTxOut::ToString() const {
-    return strprintf("CTxOut(nValue=%d.%02d, scriptPubKey=%s)",
+    return strprintf("CTxOut(nValue=%d.%04d, scriptPubKey=%s)",
                      nValue.GetSatoshis() / COIN.GetSatoshis(),
                      nValue.GetSatoshis() % COIN.GetSatoshis(),
                      HexStr(scriptPubKey).substr(0, 30));

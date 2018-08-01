@@ -1282,7 +1282,7 @@ Amount GetBlockSubsidy(int nHeight, const Consensus::Params &consensusParams) {
         reward = (MAX_MONEY - Amount(alreadyGeneratedCoins)) >> EMISSION_SPEED_FACTOR;
     }
 
-    return std::max(reward, Amount(5000));
+    return std::max(reward, 50 * COIN);
 }
 
 bool IsInitialBlockDownload() {
