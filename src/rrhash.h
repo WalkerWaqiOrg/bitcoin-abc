@@ -1,5 +1,5 @@
 // Copyright (c) 2018-2018 Walker Waqi
-// Copyright (c) 2018-2018 The RRC developers
+// Copyright (c) 2018-2018 The RRCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 

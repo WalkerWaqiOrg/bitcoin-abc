@@ -1,6 +1,6 @@
 UNIX BUILD NOTES
 ====================
-Some notes on how to build Bitcoin ABC in Unix.
+Some notes on how to build RRCoin in Unix.
 
 (for OpenBSD specific instructions, see [build-openbsd.md](build-openbsd.md))
 
@@ -24,7 +24,7 @@ make
 make install # optional
 ```
 
-This will build bitcoin-qt as well if the dependencies are met.
+This will build rrcoin-qt as well if the dependencies are met.
 
 Dependencies
 ---------------------
@@ -55,7 +55,7 @@ Memory Requirements
 --------------------
 
 C++ compilers are memory-hungry. It is recommended to have at least 1.5 GB of
-memory available when compiling Bitcoin ABC. On systems with less, gcc can be
+memory available when compiling RRCoin. On systems with less, gcc can be
 tuned to conserve memory with additional CXXFLAGS:
 
 
@@ -96,7 +96,7 @@ BerkeleyDB 5.1 or later, which break binary wallet compatibility with the distri
 are based on BerkeleyDB 4.8. If you do not care about wallet compatibility,
 pass `--with-incompatible-bdb` to configure.
 
-See the section "Disable-wallet mode" to build Bitcoin ABC without wallet.
+See the section "Disable-wallet mode" to build RRCoin without wallet.
 
 Optional (see --with-miniupnpc and --enable-upnp-default):
 
@@ -109,7 +109,7 @@ ZMQ dependencies (provides ZMQ API 4.x):
 Dependencies for the GUI: Ubuntu & Debian
 -----------------------------------------
 
-If you want to build Bitcoin-Qt, make sure that the required packages for Qt development
+If you want to build rrcoin-Qt, make sure that the required packages for Qt development
 are installed. Either Qt 5 or Qt 4 are necessary to build the GUI.
 If both Qt 4 and Qt 5 are installed, Qt 5 will be used. Pass `--with-gui=qt4` to configure to choose Qt4.
 To build without GUI pass `--without-gui`.
@@ -126,7 +126,7 @@ libqrencode (optional) can be installed with:
 
     sudo apt-get install libqrencode-dev
 
-Once these are installed, they will be found by configure and a bitcoin-qt executable will be
+Once these are installed, they will be found by configure and a rrcoin-qt executable will be
 built by default.
 
 Dependency Build Instructions: Fedora
@@ -149,7 +149,7 @@ libqrencode (optional) can be installed with:
 
 Notes
 -----
-The release is built with GCC and then "strip bitcoind" to strip the debug
+The release is built with GCC and then "strip rrcoind" to strip the debug
 symbols, which reduces the executable size by about 90%.
 
 
@@ -190,7 +190,7 @@ cd db-4.8.30.NC/build_unix/
 sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 sudo make install
 
-# Configure Bitcoin ABC to use our own-built instance of BDB
+# Configure RRCoin to use our own-built instance of BDB
 cd $BITCOIN_ROOT
 ./autogen.sh
 ./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" # (other args...)
@@ -275,8 +275,8 @@ Setup and Build Example: Arch Linux
 This example lists the steps necessary to setup and build a command line only, non-wallet distribution of the latest changes on Arch Linux:
 
     pacman -S git base-devel boost libevent python
-    git clone https://github.com/Bitcoin-ABC/bitcoin-abc
-    cd bitcoin-abc/
+    git clone https://github.com/RRNCIO/RRChain.git
+    cd RRChain/
     ./autogen.sh
     ./configure --disable-wallet --without-gui --without-miniupnpc
     make check

@@ -1,44 +1,67 @@
-[Bitcoin ABC](https://www.bitcoinabc.org)
-===========
+# RRCoin
 
-The goal of Bitcoin ABC is to create sound money that is usable by everyone in
-the world. We believe this is a civilization-changing technology which will
-dramatically increase human flourishing, freedom, and prosperity. The project
-aims to achieve this goal by implementing a series of optimizations and
-protocol upgrades that will enable peer-to-peer digital cash to scale many
-orders of magnitude beyond current limits.
+## 扩容机制
+RRCoin遵循中本聪通过链上扩容实现全球普及的路线图。作为第一步，区块大小限制已被设为可调整，默认提升到了 32MB 
 
-What is Bitcoin Cash?
----------------------
 
-[Bitcoin Cash](https://www.bitcoincash.org/) is an experimental digital
-currency that enables instant payments to anyone, anywhere in the world. It
-uses peer-to-peer technology to operate with no central authority: managing
-transactions and issuing money are carried out collectively by the network.
-Bitcoin Cash is a descendant of Bitcoin. It became a separate currency from
-the version supported by Bitcoin Core when the two split on August 1, 2017.
-Bitcoin Cash and the Bitcoin Core version of Bitcoin share the same
-transaction history up until the split.
 
-What is Bitcoin ABC?
---------------------
 
-Bitcoin ABC is the name of open-source software which enables the use of
-Bitcoin Cash. It is a fork of the [Bitcoin Core](https://bitcoincore.org)
-software project.
 
-License
--------
+## 采用BCH的难度调整算法(DAA)
 
-Bitcoin ABC is released under the terms of the MIT license. See
-[COPYING](COPYING) for more information or see
-https://opensource.org/licenses/MIT.
+DAA算法旨在避免突然的难度下降及峰值。例如，当RRCoin网络算力出现指数级的变化时，网络将迅速调整难度，同时也会避免反馈振荡。
 
-Development Process
--------------------
+难度会基于之前144个区块所完成的工作量及逝去时间，来对每个新区块进行调整。
 
-This Github repository contains only source code of releases.
 
-Bitcoin ABC development takes place at https://reviews.bitcoinabc.org/
 
-If you would like to contribute, please read [CONTRIBUTING](CONTRIBUTING.md)
+
+## 平等的挖矿权利
+
+为了实现挖矿的平等，我们设计了独有的RRHASH算法使得通用器件（例如CPU、GPU）的能效和成本不会大幅度落后于ASIC矿机。
+
+### RRHash算法
+
+ RRHASH通过一种三明治结构，能把几乎任何算法改造成哈希算法：先用某个标准哈希函数H把nonce和随机数种子seed扩展为大量的随机数输入I=H(nonce,seed)；用CPU擅长的算法A处理随机数输入I，得到一些输出O=A(I)；再用另外的哈希函数h计算这些输出的哈希值h(O)，以leading zero的数目判断是否满足难度要求。这种三明治结构，已经被ZCash证明是有效的了，我们只需要把中间部分的广义生日悖论问题修改为CPU擅长的其它算法。由于有收尾的标准哈希算法把关，h(A(H(nonce,seed)))可以满足哈希函数的雪崩特性和不可逆特性，满足PoW算法所需要的随机性、公平性和不可预测性。
+
+自计算机诞生以来，人类所开发的适合CPU运行的算法数目极多，我们准备按照先易后难的顺序，逐步选择一些算法，添加到PoW算法集合中，我们计划第一期添加的算法包括如下类别：
+
+1、  常见数据结构的建立和访问：各种树（红黑树、B树、B+树等），优先队列，斐波拉契堆，HashTable，Cockoo-HashTable，Bloom-Filter等等
+2、  典型的排序算法
+3、  典型的动态规划算法
+4、  字符串匹配
+5、  图算法（最短路径，All-pairs最短路径，最小支撑树，最大流）
+6、  矩阵算法（乘法，转秩，求逆，求特征值等等）
+7、  最小二乘法
+8、  牛顿迭代法
+9、  傅立叶变换
+10、 维特比译码
+11、 线性规划
+12、 纠错算法（LDPC、ECC等）
+13、 压缩算法（gzip、LZ4等）
+14、 正则表达式
+15、 逆波兰表达式求值
+
+不同的算法有不同的访存行为，很多算法做到把L1、L2、L3 Cache以及DRAM接口都充分使用起来。因此，在必要的时候，我们会加入额外的、同算法本身无关的“填充逻辑”。填充逻辑以算法本身运行时的一些随机结果为输入，经过少量的计算，产生众多访存操作，把让存储系统忙起来。
+
+
+
+## 出币机制
+
+总量：           18亿
+
+出币量： （总量-已出币总量）>> 发币速度
+
+RRCoin使用了平缓的释放，避免了类似比特币的减半策略。
+
+​ BTC发币的速度大概每过四年就会减半，在大约2020年的时候会从每个块12.5个变成6.25个。看上去似乎还行，但是在2012年11月28号，比特币的奖励从五十个下降到了二十五个。大家似乎就不认为这个还行，觉得有点不能忍。
+
+ RRCoin没有这种每过一段时间减一半这样有这么大断层的东西。先定一个总量，然后我们每次的reward，是基于总量减去已经当前出币量的一个算法，所以它相对平缓一些。从而避免了类似比特币的减半策略。
+
+
+## 主链进展（2018-07-13）
+1. RRHash lib V1 封装
+2. RRHash lib V1 整合进主链
+3. 主链出币规则调整
+4. 主链交易手续费用修改
+5. Alpha V1测试链上线
