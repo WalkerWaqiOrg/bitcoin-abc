@@ -146,7 +146,7 @@ public:
         consensus.monolithActivationTime = 1526400000;
 
         // Nov 15, 2018 hard fork
-        consensus.magneticAnomalyActivationTime = 4102415999;
+        consensus.magneticAnomalyActivationTime = 4102416000;
 
         /**
          * The message start string is designed to be unlikely to occur in
