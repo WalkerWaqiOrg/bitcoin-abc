@@ -266,7 +266,7 @@ void OverviewPage::setWalletModel(WalletModel *model) {
                 SLOT(updateWatchOnlyLabels(bool)));
     }
 
-    // update the display unit, to not use the default ("RRC")
+    // update the display unit, to not use the default ("RRCoin")
     updateDisplayUnit();
 }
 
