@@ -915,7 +915,7 @@ std::string HelpMessage(HelpMessageMode mode) {
 
 std::string LicenseInfo() {
     const std::string URL_SOURCE_CODE =
-        "<https://github.com/WalkerWaqiOrg/bitcoin-abc>";
+        "<https://github.com/RRNCIO/RRChain>";
     const std::string URL_WEBSITE = "<http://rrnc.io>";
 
     return CopyrightHolders(

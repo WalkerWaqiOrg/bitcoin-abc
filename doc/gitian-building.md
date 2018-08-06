@@ -100,7 +100,7 @@ Building RR CHAIN
 To build RR CHAIN (for Linux, OS X and Windows) run the following commands:
 
 ```bash
-URL=https://github.com/WalkerWaqiOrg/bitcoin-abc.git
+URL=https://github.com/RRNCIO/RRChain.git
 COMMIT=v0.16.0 # or whatever release tag you wish
 
 # Note the path to descriptors assumes vagrant was used.  These files are within the ABC repository normally.

@@ -2,8 +2,6 @@
 
 ##编译
 
-git clone https://github.com/WalkerWaqiOrg/rr_hash.git
-
 cd rr_hash
 
 mkdir build
