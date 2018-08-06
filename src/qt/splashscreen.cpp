@@ -46,7 +46,7 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle)
     QString versionText =
         QString("Version %1").arg(QString::fromStdString(FormatFullVersion()));
     QString copyrightText = QString::fromUtf8(
-        CopyrightHolders(strprintf("\xc2\xA9 %u-%u ", 2009, COPYRIGHT_YEAR))
+        CopyrightHolders(strprintf("\xc2\xA9 %u-%u ", 2018, COPYRIGHT_YEAR))
             .c_str());
     QString titleAddText = networkStyle->getTitleAddText();
 

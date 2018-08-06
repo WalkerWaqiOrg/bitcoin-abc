@@ -919,7 +919,7 @@ std::string LicenseInfo() {
     const std::string URL_WEBSITE = "<http://rrnc.io>";
 
     return CopyrightHolders(
-               strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) +
+               strprintf(_("Copyright (C) %i-%i"), 2018, COPYRIGHT_YEAR) +
                " ") +
            "\n" + "\n" +
            strprintf(_("Please contribute if you find %s useful. "
