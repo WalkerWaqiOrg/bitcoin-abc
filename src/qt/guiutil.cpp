@@ -163,7 +163,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent) {
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
     widget->setPlaceholderText(
-        QObject::tr("Enter a Bitcoin address (e.g. %1)")
+        QObject::tr("Enter a RRCoin address (e.g. %1)")
             .arg(QString::fromStdString(DummyAddress(GetConfig()))));
 #endif
     widget->setValidator(
@@ -639,12 +639,12 @@ TableViewLastColumnResizingFixer::TableViewLastColumnResizingFixer(
 static fs::path StartupShortcutPath() {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Bitcoin.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "RRCoin.lnk";
     // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
     if (chain == CBaseChainParams::TESTNET)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Bitcoin (testnet).lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "RRCoin (testnet).lnk";
     return GetSpecialFolderPath(CSIDL_STARTUP) /
-           strprintf("Bitcoin (%s).lnk", chain);
+           strprintf("RRCoin (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup() {
@@ -737,8 +737,8 @@ static fs::path GetAutostartDir() {
 static fs::path GetAutostartFilePath() {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "bitcoin.desktop";
-    return GetAutostartDir() / strprintf("bitcoin-%s.lnk", chain);
+        return GetAutostartDir() / "rrcoin.desktop";
+    return GetAutostartDir() / strprintf("rrcoin-%s.lnk", chain);
 }
 
 bool GetStartOnSystemStartup() {
@@ -777,9 +777,9 @@ bool SetStartOnSystemStartup(bool fAutoStart) {
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=Bitcoin\n";
+            optionFile << "Name=RRCoin\n";
         else
-            optionFile << strprintf("Name=Bitcoin (%s)\n", chain);
+            optionFile << strprintf("Name=RRCoin (%s)\n", chain);
         optionFile << "Exec=" << pszExePath
                    << strprintf(" -min -testnet=%d -regtest=%d\n",
                                 gArgs.GetBoolArg("-testnet", false),

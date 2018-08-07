@@ -298,7 +298,7 @@ void BitcoinGUI::createActions() {
     sendCoinsAction->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     setToolBarIcon(sendCoinsAction, ":/icons/send", ":/icons/send_hover");
     sendCoinsAction->setText(tr("&Send"));
-    sendCoinsAction->setStatusTip(tr("Send coins to a Bitcoin address"));
+    sendCoinsAction->setStatusTip(tr("Send coins to a RRCoin address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
     sendCoinsAction->setStyleSheet(defaultToolButtonStyle);
@@ -413,12 +413,12 @@ void BitcoinGUI::createActions() {
         new QAction(platformStyle->TextColorIcon(":/icons/edit"),
                     tr("Sign &message..."), this);
     signMessageAction->setStatusTip(
-        tr("Sign messages with your Bitcoin addresses to prove you own them"));
+        tr("Sign messages with your RRCoin addresses to prove you own them"));
     verifyMessageAction =
         new QAction(platformStyle->TextColorIcon(":/icons/verify"),
                     tr("&Verify message..."), this);
     verifyMessageAction->setStatusTip(
-        tr("Verify messages to ensure they were signed with specified Bitcoin "
+        tr("Verify messages to ensure they were signed with specified RRCoin "
            "addresses"));
 
     openRPCConsoleAction =
@@ -823,7 +823,7 @@ void BitcoinGUI::updateNetworkState() {
     QString tooltip;
 
     if (clientModel->getNetworkActive()) {
-        tooltip = tr("%n active connection(s) to Bitcoin network", "", count) +
+        tooltip = tr("%n active connection(s) to RRCoin network", "", count) +
                   QString(".<br>") + tr("Click to disable network activity.");
     } else {
         tooltip = tr("Network activity disabled.") + QString("<br>") +

@@ -540,7 +540,7 @@ void BitcoinApplication::shutdownResult(int retval) {
 void BitcoinApplication::handleRunawayException(const QString &message) {
     QMessageBox::critical(
         0, "Runaway exception",
-        BitcoinGUI::tr("A fatal error occurred. Bitcoin can no longer continue "
+        BitcoinGUI::tr("A fatal error occurred. RRCoin can no longer continue "
                        "safely and will quit.") +
             QString("\n\n") + message);
     ::exit(EXIT_FAILURE);
@@ -557,14 +557,14 @@ WId BitcoinApplication::getMainWinId() const {
 static void MigrateSettings() {
     assert(!QApplication::applicationName().isEmpty());
 
-    static const QString legacyAppName("Bitcoin-Qt"),
+    static const QString legacyAppName("RRCoin-Qt"),
 #ifdef Q_OS_DARWIN
         // Macs and/or iOS et al use a domain-style name for Settings
         // files. All other platforms use a simple orgname. This
         // difference is documented in the QSettings class documentation.
-        legacyOrg("bitcoin.org");
+        legacyOrg("rrcoin.org");
 #else
-        legacyOrg("Bitcoin");
+        legacyOrg("RRCoin");
 #endif
     QSettings
         // below picks up settings file location based on orgname,appname

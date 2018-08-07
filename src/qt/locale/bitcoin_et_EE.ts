@@ -761,7 +761,7 @@
     </message>
     <message>
         <source>Bitcoin ABC</source>
-        <translation>Bitcoin ABC</translation>
+        <translation>RRCoin</translation>
     </message>
     <message>
         <source>Information</source>

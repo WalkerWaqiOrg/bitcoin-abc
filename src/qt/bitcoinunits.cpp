@@ -42,9 +42,9 @@ QString BitcoinUnits::name(int unit) {
 QString BitcoinUnits::description(int unit) {
     switch (unit) {
         case BCH:
-            return QString("RRcoins");
+            return QString("RRCoins");
         case cBCH:
-            return QString("Cent-RRcoins (1 / 1" THIN_SP_UTF8 "00)");
+            return QString("Cent-RRCoins (1 / 1" THIN_SP_UTF8 "00)");
         default:
             return QString("???");
     }

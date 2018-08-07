@@ -35,7 +35,7 @@ SendCoinsEntry::SendCoinsEntry(const PlatformStyle *_platformStyle,
     ui->messageTextLabel->setToolTip(
         tr("A message that was attached to the %1 URI which will be"
            " stored with the transaction for your reference. Note: "
-           "This message will not be sent over the Bitcoin network.")
+           "This message will not be sent over the RRCoin network.")
             .arg(GUIUtil::bitcoinURIScheme(GetConfig())));
 
     setCurrentWidget(ui->SendCoins);
@@ -117,7 +117,7 @@ void SendCoinsEntry::clear() {
     ui->memoTextLabel_s->clear();
     ui->payAmount_s->clear();
 
-    // update the display unit, to not use the default ("RRcoin")
+    // update the display unit, to not use the default ("RRCoin")
     updateDisplayUnit();
 }
 
