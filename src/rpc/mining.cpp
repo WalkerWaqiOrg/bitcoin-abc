@@ -551,12 +551,12 @@ static UniValue getblocktemplate(const Config &config,
 
     if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0) {
         throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED,
-                           "RRC is not connected!");
+                           "RRCoin is not connected!");
     }
 
     if (IsInitialBlockDownload()) {
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                           "RRC is downloading blocks...");
+                           "RRCoin is downloading blocks...");
     }
 
     static unsigned int nTransactionsUpdatedLast;

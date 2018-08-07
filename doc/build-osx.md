@@ -29,17 +29,17 @@ In case you want to build the disk image with `make deploy` (.dmg / optional), y
 
     brew install librsvg
 
-Build RR CHAIN
+Build RRCoin
 -----------------
 
-1. Clone the RR CHAIN source code and cd into `rr-chain`
+1. Clone the RRCoin source code and cd into `RRChain`
 
         git clone https://github.com/RRNCIO/RRChain.git
         cd RRChain
 
-2.  Build RRChain:
+2.  Build RRCoin:
 
-    Configure and build the headless rrc binaries as well as the GUI (if Qt is found).
+    Configure and build the headless rrcoin binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 
@@ -58,37 +58,37 @@ Build RR CHAIN
 Running
 -------
 
-RR CHAIN is now available at `./src/rrcd`
+RRCoin is now available at `./src/rrcoind`
 
 Before running, it's recommended you create an RPC configuration file.
 
-    echo -e "rpcuser=rrcrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/RRC/rrc.conf"
+    echo -e "rpcuser=rrcoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/RRCoin/rrcoin.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/RRC/rrc.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/RRCoin/rrcoin.conf"
 
-The first time you run rrcd, it will start downloading the blockchain. This process could take several hours.
+The first time you run rrcoind, it will start downloading the blockchain. This process could take several hours.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/RRC/debug.log
+    tail -f $HOME/Library/Application\ Support/RRCoin/debug.log
 
 Other commands:
 -------
 
-    ./src/rrcd -daemon # Starts the rrc daemon.
-    ./src/rrc-cli --help # Outputs a list of command-line options.
-    ./src/rrc-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/rrcoind -daemon # Starts the rrcoin daemon.
+    ./src/rrcoin-cli --help # Outputs a list of command-line options.
+    ./src/rrcoin-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Using Qt Creator as IDE
 ------------------------
-You can use Qt Creator as an IDE, for rrc development.
+You can use Qt Creator as an IDE, for rrcoin development.
 Download and install the community edition of [Qt Creator](https://www.qt.io/download/).
 Uncheck everything except Qt Creator during the installation process.
 
 1. Make sure you installed everything through Homebrew mentioned above
 2. Do a proper ./configure --enable-debug
 3. In Qt Creator do "New Project" -> Import Project -> Import Existing Project
-4. Enter "rrc-qt" as project name, enter src/qt as location
+4. Enter "rrcoin-qt" as project name, enter src/qt as location
 5. Leave the file selection as it is
 6. Confirm the "summary page"
 7. In the "Projects" tab select "Manage Kits..."

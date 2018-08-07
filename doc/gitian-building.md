@@ -22,7 +22,7 @@ Table of Contents
 
 - [Preparing the Gitian builder host](#preparing-the-gitian-builder-host)
 - [Setting up the Gitian image](#setting-up-the-gitian-image)
-- [Building RR CHAIN](#building-rr-chain)
+- [Building RRCoin](#building-rrcoin)
 
 
 Preparing the Gitian builder host
@@ -94,10 +94,10 @@ bin/make-base-vm --lxc --arch amd64 --suite xenial
 There will be a lot of warnings printed during the build of the image. These
 can be ignored.
 
-Building RR CHAIN
+Building RRCoin
 --------------------
 
-To build RR CHAIN (for Linux, OS X and Windows) run the following commands:
+To build RRCoin (for Linux, OS X and Windows) run the following commands:
 
 ```bash
 URL=https://github.com/RRNCIO/RRChain.git

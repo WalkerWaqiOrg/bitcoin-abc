@@ -507,7 +507,7 @@ std::vector<std::string> CRPCTable::listCommands() const {
 
 std::string HelpExampleCli(const std::string &methodname,
                            const std::string &args) {
-    return "> rrc-cli " + methodname + " " + args + "\n";
+    return "> rrcoin-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(const std::string &methodname,

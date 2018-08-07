@@ -28,7 +28,7 @@ make
 
 ## 拷贝
 
-拷贝librrhash.so   到  rrcd 可执行文件 同级目录。
+拷贝librrhash.so   到  rrcoind 可执行文件 同级目录。
 
 
 

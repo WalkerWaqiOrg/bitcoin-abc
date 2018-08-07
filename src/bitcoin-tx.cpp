@@ -56,12 +56,12 @@ static int AppInitRawTx(int argc, char *argv[]) {
         gArgs.IsArgSet("-help")) {
         // First part of help message is specific to this utility
         std::string strUsage =
-            strprintf(_("%s rrc-tx utility version"), _(PACKAGE_NAME)) +
+            strprintf(_("%s rrcoin-tx utility version"), _(PACKAGE_NAME)) +
             " " + FormatFullVersion() + "\n\n" + _("Usage:") + "\n" +
-            "  rrc-tx [options] <hex-tx> [commands]  " +
-            _("Update hex-encoded rrc transaction") + "\n" +
-            "  rrc-tx [options] -create [commands]   " +
-            _("Create hex-encoded rrc transaction") + "\n" + "\n";
+            "  rrcoin-tx [options] <hex-tx> [commands]  " +
+            _("Update hex-encoded rrcoin transaction") + "\n" +
+            "  rrcoin-tx [options] -create [commands]   " +
+            _("Create hex-encoded rrcoin transaction") + "\n" + "\n";
 
         fprintf(stdout, "%s", strUsage.c_str());
 

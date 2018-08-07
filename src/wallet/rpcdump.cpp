@@ -80,11 +80,11 @@ UniValue importprivkey(const Config &config, const JSONRPCRequest &request) {
 
     if (request.fHelp || request.params.size() < 1 || request.params.size() > 3)
         throw std::runtime_error(
-            "importprivkey \"rrcprivkey\" ( \"label\" ) ( rescan )\n"
+            "importprivkey \"rrcoinprivkey\" ( \"label\" ) ( rescan )\n"
             "\nAdds a private key (as returned by dumpprivkey) to your "
             "wallet.\n"
             "\nArguments:\n"
-            "1. \"rrcprivkey\"   (string, required) The private key (see "
+            "1. \"rrcoinprivkey\"   (string, required) The private key (see "
             "dumpprivkey)\n"
             "2. \"label\"            (string, optional, default=\"\") An "
             "optional label\n"
@@ -286,7 +286,7 @@ UniValue importaddress(const Config &config, const JSONRPCRequest &request) {
                      fP2SH);
     } else {
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY,
-                           "Invalid RRC address or script");
+                           "Invalid RRCoin address or script");
     }
 
     if (fRescan) {
@@ -633,7 +633,7 @@ UniValue dumpprivkey(const Config &config, const JSONRPCRequest &request) {
             "\nReveals the private key corresponding to 'address'.\n"
             "Then the importprivkey can be used with this output\n"
             "\nArguments:\n"
-            "1. \"address\"   (string, required) The rrc address for the "
+            "1. \"address\"   (string, required) The rrcoin address for the "
             "private key\n"
             "\nResult:\n"
             "\"key\"                (string) The private key\n"
@@ -652,7 +652,7 @@ UniValue dumpprivkey(const Config &config, const JSONRPCRequest &request) {
         DecodeDestination(strAddress, config.GetChainParams());
     if (!IsValidDestination(dest)) {
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY,
-                           "Invalid rrc address");
+                           "Invalid RRCoin address");
     }
     const CKeyID *keyID = boost::get<CKeyID>(&dest);
     if (!keyID) {
@@ -681,7 +681,7 @@ UniValue dumpwallet(const Config &config, const JSONRPCRequest &request) {
             "files.\n"
             "\nArguments:\n"
             "1. \"filename\"    (string, required) The filename with path "
-            "(either absolute or relative to rrcd)\n"
+            "(either absolute or relative to rrcoind)\n"
             "\nResult:\n"
             "{                           (json object)\n"
             "  \"filename\" : {        (string) The filename with full "
@@ -734,7 +734,7 @@ UniValue dumpwallet(const Config &config, const JSONRPCRequest &request) {
     std::sort(vKeyBirth.begin(), vKeyBirth.end());
 
     // produce output
-    file << strprintf("# Wallet dump created by RR %s\n", CLIENT_BUILD);
+    file << strprintf("# Wallet dump created by RRCoin %s\n", CLIENT_BUILD);
     file << strprintf("# * Created on %s\n", EncodeDumpTime(GetTime()));
     file << strprintf("# * Best block at time of backup was %i (%s),\n",
                       chainActive.Height(),

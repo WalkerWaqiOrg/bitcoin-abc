@@ -2,10 +2,10 @@
 
 *.exe
 src/bitcoin
-src/rrcd
-src/rrc-cli
-src/rrc-seeder
-src/rrc-tx
+src/rrcoind
+src/rrcoin-cli
+src/rrcoin-seeder
+src/rrcoin-tx
 src/test/test_bitcoin
 src/test/test_bitcoin_fuzzy
 src/qt/test/test_bitcoin-qt
@@ -75,7 +75,7 @@ src/qt/test/moc*.cpp
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-rrc-qt
+rrcoin-qt
 Bitcoin-Qt.app
 
 # Unit-tests

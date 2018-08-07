@@ -1064,7 +1064,7 @@ UniValue gettxout(const Config &config, const JSONRPCRequest &request) {
             "     \"type\" : \"pubkeyhash\", (string) The type, eg pubkeyhash\n"
             "     \"addresses\" : [          (array of string) array of "
             "rr addresses\n"
-            "        \"address\"     (string) rrc address\n"
+            "        \"address\"     (string) rrcoin address\n"
             "        ,...\n"
             "     ]\n"
             "  },\n"
