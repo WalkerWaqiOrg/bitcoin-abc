@@ -189,7 +189,7 @@ static UniValue generatetoaddress(const Config &config,
             "1. nblocks      (numeric, required) How many blocks are generated "
             "immediately.\n"
             "2. address      (string, required) The address to send the newly "
-            "generated bitcoin to.\n"
+            "generated rrcoin to.\n"
             "3. maxtries     (numeric, optional) How many iterations to try "
             "(default = 1000000).\n"
             "\nResult:\n"
