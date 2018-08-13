@@ -55,6 +55,7 @@
 #include <QThread>
 #include <QTimer>
 #include <QTranslator>
+#include <QDir>
 
 #if defined(QT_STATICPLUGIN)
 #include <QtPlugin>
@@ -612,6 +613,9 @@ int main(int argc, char *argv[]) {
     Q_INIT_RESOURCE(bitcoin_locale);
 
     BitcoinApplication app(argc, argv);
+	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
+    QDir::setCurrent(QCoreApplication::applicationDirPath());
+	
 #if QT_VERSION > 0x050100
     // Generate high-dpi pixmaps
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
