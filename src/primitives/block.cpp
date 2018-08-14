@@ -28,12 +28,12 @@ std::string CBlock::ToString() const {
 }
 
 CRRHash*    CRRHash::instance_ = NULL;
-std::mutex  CRRHash::mutex_;
+boost::mutex  CRRHash::mutex_;
 CRRHash* CRRHash::GetInstance()
 {
     if (instance_ == NULL)
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        boost::unique_lock<boost::mutex> lock(mutex_);
         if (instance_ == NULL) 
         {
             instance_ = new CRRHash();

@@ -8,7 +8,7 @@
 
 #include "hash.h"
 #include <dlfcn.h>
-#include <mutex>
+#include <boost/thread/mutex.hpp>
 
 #define RRHASH_LIB_PATH         "./librrhash.so"
 #define RRHASH_LIB_PATH_WIN     "./librrhash.dll"
@@ -51,7 +51,7 @@ private:
 	CRRHash& operator=(const CRRHash&);
 
     static CRRHash*     instance_;
-    static std::mutex   mutex_;
+    static boost::mutex   mutex_;
 
 public:
 
