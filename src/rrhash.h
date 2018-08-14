@@ -8,6 +8,7 @@
 
 #include "hash.h"
 #include <dlfcn.h>
+#include <mutex>
 
 #define RRHASH_LIB_PATH         "./librrhash.so"
 #define RRHASH_LIB_PATH_WIN     "./librrhash.dll"
@@ -18,9 +19,8 @@ typedef void (*RUN_RRHASH_FUNC)(const char *data, size_t length, unsigned char *
 class CRRHash {
 private:
     void*               rrhash_handle_;
-    RUN_RRHASH_FUNC     rrhash_func;
+    RUN_RRHASH_FUNC     rrhash_func_;
 
-public:
     CRRHash()
     {
 #ifdef WIN32
@@ -33,7 +33,7 @@ public:
             exit(EXIT_FAILURE);
         }
 
-        rrhash_func = (RUN_RRHASH_FUNC)dlsym(rrhash_handle_, RRHASH_LIB_FUNC);
+        rrhash_func_ = (RUN_RRHASH_FUNC)dlsym(rrhash_handle_, RRHASH_LIB_FUNC);
         if (dlerror() != NULL)  {
             fprintf(stderr, "%s\n", dlerror());
             exit(EXIT_FAILURE);
@@ -47,9 +47,19 @@ public:
         }
     }
 
+    CRRHash(const CRRHash&);
+	CRRHash& operator=(const CRRHash&);
+
+    static CRRHash*     instance_;
+    static std::mutex   mutex_;
+
+public:
+
+    static CRRHash* GetInstance();
+
     void Hash(const char *data, size_t length, unsigned char *hash)
     {
-        rrhash_func(data, length, hash);
+        rrhash_func_(data, length, hash);
     }
 };
 
@@ -61,7 +71,6 @@ private:
     const int nType;
     const int nVersion;
 
-    static CRRHash hash_;
     std::string buffer;
 
 public:
@@ -80,7 +89,7 @@ public:
     uint256 GetHash() {
         uint256 result;
         // ctx.Finalize((uint8_t *)&result);
-	    CRRHashWriter::hash_.Hash(buffer.data(), buffer.length(), (unsigned char*)&result);
+	    CRRHash::GetInstance()->Hash(buffer.data(), buffer.length(), (unsigned char*)&result);
         return result;
     }
 

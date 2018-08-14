@@ -27,4 +27,18 @@ std::string CBlock::ToString() const {
     return s.str();
 }
 
-CRRHash CRRHashWriter::hash_;
+CRRHash*    CRRHash::instance_ = NULL;
+std::mutex  CRRHash::mutex_;
+CRRHash* CRRHash::GetInstance()
+{
+    if (instance_ == NULL)
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (instance_ == NULL) 
+        {
+            instance_ = new CRRHash();
+        }
+    }
+
+    return instance_;
+}
