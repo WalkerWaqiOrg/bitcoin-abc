@@ -56,14 +56,8 @@ public:
             index.data(TransactionTableModel::AmountRole).toLongLong());
         bool confirmed =
             index.data(TransactionTableModel::ConfirmedRole).toBool();
-        QVariant value = index.data(Qt::ForegroundRole);
-        QColor foreground = option.palette.color(QPalette::Text);
-        if (value.canConvert<QBrush>()) {
-            QBrush brush = qvariant_cast<QBrush>(value);
-            foreground = brush.color();
-        }
 
-        painter->setPen(QColor(COLOR_NEGATIVE));
+        painter->setPen(QColor(130,133,138));
         QRect boundingRect;
         painter->drawText(addressRect, Qt::AlignLeft | Qt::AlignVCenter,
                           address, &boundingRect);
@@ -77,14 +71,7 @@ public:
             iconWatchonly.paint(painter, watchonlyRect);
         }
 
-        if (amount < Amount(0)) {
-            foreground = COLOR_NEGATIVE;
-        } else if (!confirmed) {
-            foreground = COLOR_UNCONFIRMED;
-        } else {
-            foreground = option.palette.color(QPalette::Text);
-        }
-        painter->setPen(foreground);
+        painter->setPen(QColor(COLOR_NEGATIVE));
         QString amountText = BitcoinUnits::formatWithUnit(
             unit, amount, true, BitcoinUnits::separatorAlways);
         if (!confirmed) {
@@ -93,7 +80,7 @@ public:
         painter->drawText(amountRect, Qt::AlignRight | Qt::AlignVCenter,
                           amountText);
 
-        painter->setPen(option.palette.color(QPalette::Text));
+        painter->setPen(QColor(130,133,138));
         painter->drawText(amountRect, Qt::AlignLeft | Qt::AlignVCenter,
                           GUIUtil::dateTimeStr(date));
 
