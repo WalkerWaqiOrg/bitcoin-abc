@@ -976,7 +976,7 @@ void BitcoinGUI::setNumBlocks(int count, const QDateTime &blockDate,
 void BitcoinGUI::message(const QString &title, const QString &message,
                          unsigned int style, bool *ret) {
     // default title
-    QString strTitle = tr("Bitcoin");
+    QString strTitle = tr("RRCoin");
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;
